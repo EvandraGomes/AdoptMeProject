@@ -1,6 +1,6 @@
 # Relatório do projeto de desenvolvimento de uma aplicação móvel para adoção de animais e doação de bens.
 
-##EI/D01/2ºano/Grupo2:
+## EI/D01/2ºano/Grupo2:
 1. Evandra Gomes 20230416
 2. Silana Naval 20230306
 3. Wesley Vinhas 20220119
@@ -187,3 +187,30 @@ desejam acompanhar o seu progresso.
   4. Envio de Mensagens para o Abrigo: Silana utiliza o sistema de mensagens
   integrado na app para contactar o abrigo e esclarecer dúvidas sobre o
   estado de saúde do animal.
+
+## 10. Contribuições das Unidades Curriculares 
+
+Cada unidade curricular terá a sua contribuição no desenvolvimento deste projeto. Seguindo embaixo as mesmas:
+
+### Programação de Dispositivos Móveis
+
+Esta unidade curricular ajudará na parte de desenvolvimento da nossa app utilizando o Android Studio.
+
+### Programação Orientada a Objetos
+
+Esta unidade curricular ajudará na perte das API's que pretendemos utilizar na app e também no desenvolvimento de um servidor em Spring Boot.
+
+### Bases de dados
+Esta unidade curricular ajudará na criação da base de dados da nossa app, o que vai contribuir para uma melhor gestão das informações dos nossos utilizadores e restantes entidades.
+
+### Competências Comunicacionais
+Esta unidade curricular contribuirá para a melhoria ou acompanhamento das nossas apresentações no projeto. Podendo entregar, assim, apresentações e relatórios mais perceptíveis para o público.
+
+### Matematica Discreta
+Com esta unidade curricular nós pretendemos que ajude na parte de percentagens e análises dos dados da nosssa app. 
+
+## 11. Modelo de Domínio 
+
+Na imagem anexada, pode-se averiguar o nome das entidades e as suas correlações que iremos utilizar na BD (base de dados).
+
+<img width="450" alt="modelo de domínio" src="https://github.com/user-attachments/assets/458d5eaf-c618-40a5-8214-74fd94abc8a3">
