@@ -1,0 +1,13 @@
+# Pastas do Android Studio e Gradle
+.idea/
+.gradle/
+build/
+
+# Arquivos de configuração local
+local.properties
+
+# Arquivos de dependências
+*.iml
+
+# Arquivos do sistema operacional
+.DS_Store
