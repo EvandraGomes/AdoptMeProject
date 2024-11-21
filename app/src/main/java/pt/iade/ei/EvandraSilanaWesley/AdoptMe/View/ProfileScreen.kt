@@ -13,7 +13,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.clickable
@@ -24,7 +23,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Person
-import androidx.compose.ui.graphics.Color.Companion.Gray
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import pt.iade.ei.EvandraSilanaWesley.AdoptMe.R
@@ -38,7 +36,7 @@ fun ProfileScreenContent(navController: NavHostController) {
             TopAppBar(
                 title = {},
                 navigationIcon = {
-                    IconButton(onClick = { /* Ação de voltar */ }) {
+                    IconButton(onClick = { navController.navigate("HomeScreen") }) {
                         Icon(
                             imageVector = Icons.Filled.ArrowBack,
                             contentDescription = "Voltar"

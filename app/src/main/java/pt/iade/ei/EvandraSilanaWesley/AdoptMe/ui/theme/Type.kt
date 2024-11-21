@@ -15,6 +15,10 @@ val Poppins = FontFamily(
     Font(R.font.poppins_bold, FontWeight.Bold) // Bold
 )
 
+val Alata = FontFamily(
+    Font(R.font.alata_regular),
+)
+
 val Typography = androidx.compose.material3.Typography(
     displayLarge = TextStyle(
         fontFamily = Poppins,
@@ -35,5 +39,12 @@ val Typography = androidx.compose.material3.Typography(
         fontFamily = Poppins,
         fontWeight = FontWeight.Normal,
         fontSize = 16.sp
-    )
+    ),
+    headlineLarge = TextStyle(
+        fontFamily = Alata,
+        fontWeight = FontWeight.Normal,
+        fontSize = 28.sp
 )
+)
+
+

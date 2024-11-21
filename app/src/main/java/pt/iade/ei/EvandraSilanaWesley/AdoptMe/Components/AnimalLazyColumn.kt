@@ -1,4 +1,4 @@
-package pt.iade.ei.EvandraSilanaWesley.AdoptMe.ContentContainerInfo
+package pt.iade.ei.EvandraSilanaWesley.AdoptMe.Components
 
 import pt.iade.ei.EvandraSilanaWesley.AdoptMe.R
 import androidx.compose.foundation.layout.Arrangement
@@ -10,7 +10,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import pt.iade.ei.EvandraSilanaWesley.AdoptMe.ContentContainerInfo.Animal
+import pt.iade.ei.EvandraSilanaWesley.AdoptMe.Models.Animal
 
 @Composable
 fun AnimalList(animals: List<Animal>) {

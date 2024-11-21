@@ -1,4 +1,4 @@
-package pt.iade.ei.EvandraSilanaWesley.AdoptMe
+package pt.iade.ei.EvandraSilanaWesley.AdoptMe.View
 
 import HomeScreen
 import ProfileScreenContent
@@ -6,26 +6,15 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.ModalNavigationDrawer
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.marcacao.MarcacaoScreen
 import com.example.statusscreen.StatusScreenContent
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import pt.iade.ei.EvandraSilanaWesley.AdoptMe.Components.getAnimalList
 import pt.iade.ei.EvandraSilanaWesley.AdoptMe.ui.theme.AdoptMeTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -51,23 +40,33 @@ class MainActivity : ComponentActivity() {
                     composable("ProfileScreen") {
                         ProfileScreenContent(navController = navController)
                     }
-                    composable("MarcacoesScreen"){
+                    composable("MarcacoesScreen") {
                         MarcacaoScreen(navController = navController)
                     }
-                    composable("StatusScreen"){
+                    composable("StatusScreen") {
                         StatusScreenContent(navController = navController)
                     }
-                }
+                    composable("DoacoesScreen") {
+                        DoacoesScreenContent(navController = navController)
                     }
+                    composable("AnimalDescriptionScreen/{animalId}") { backStackEntry ->
+                        val animalId = backStackEntry.arguments?.getString("animalId")?.toInt() ?: 0
+                        val animal = getAnimalList().find { it.id == animalId }
+                        animal?.let {
+                            AnimalDescriptionScreenContent(
+                                navController = navController,
+                                animal = it,
+                                onVoltarClick = { navController.popBackStack() })
                 }
             }
         }
+    }
 
 
+    @Composable
+    fun HomeScreenPreview() {
+        val navController = rememberNavController()
+        HomeScreen(navController = navController)
+    }
+}}}
 
-@Preview(showBackground = true)
-@Composable
-fun HomeScreenPreview() {
-    val navController = rememberNavController()
-    HomeScreen(navController = navController)
-}
