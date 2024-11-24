@@ -1,4 +1,32 @@
-Update Base de Dados
+# TABELA User
+
+```sql
+CREATE TABLE User (
+    usr_id INT AUTO_INCREMENT PRIMARY KEY,          
+    usr_name VARCHAR(255) NOT NULL,                  
+    usr_email VARCHAR(255) NOT NULL,                
+    usr_password VARCHAR(255) NOT NULL,             
+    usr_date_registered TIMESTAMP DEFAULT CURRENT_TIMESTAMP,  
+    usr_image VARCHAR(255) -- Adicionando a coluna de imagem
+);
+# TABELA Animal
+
+```sql
+CREATE TABLE Animal (
+    ani_id INT AUTO_INCREMENT PRIMARY KEY,          
+    ani_name VARCHAR(255) NOT NULL,                  
+    ani_birthdate DATE NOT NULL,                    
+    ani_gender CHAR(1) CHECK (ani_gender IN ('M', 'F')), 
+    ani_description TEXT,                           
+    ani_breed VARCHAR(255),                         
+    ani_type VARCHAR(255) NOT NULL,
+    ani_image VARCHAR(255) -- Adicionando a coluna de imagem
+);
+# TABELA Status
+
+```sql
+CREATE TABLE Status (
+    sta_id INT AUTO_INCREMENT PRIMARY KEY,          
     sta_ani_id INT,                                 
     sta_first_visit BOOLEAN,                        
     sta_adopter_evaluation BOOLEAN,                 
