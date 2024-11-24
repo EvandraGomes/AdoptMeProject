@@ -49,48 +49,197 @@ direta e acessibilidade.
 
 ## 4.Funcionalidades da Aplicação
 
-**Modelo 1- Inofrmações do animal** Este modelo armazena as informações básicas sobre os animais disponíveis para adoção, incluindo:
+# Modelos de Relatório da Aplicação
 
-  * Nome do animal
-  * Espécie (cão, gato, etc.)
-  * Raça
-  * Idade
-  * Cor
-  * Descrição detalhada
-  * Imagens do animal
+## **Modelo 1 - Informações sobre Animais**
+Este modelo apresenta detalhes completos sobre os animais cadastrados na aplicação.
 
-  Essas informações serão usadas para apresentar os animais de forma clara aos possíveis adotantes, com filtros de busca e categorias.
+### **Atributos:**
+- `ani_id`: Identificador único do animal.
+- `ani_name`: Nome do animal.
+- `ani_birthdate`: Data de nascimento.
+- `ani_gender`: Gênero (M/F).
+- `ani_description`: Descrição detalhada do animal.
+- `ani_breed`: Raça.
+- `ani_type`: Tipo (Cão, Gato, etc.).
+- `ani_image`: URL da imagem.
 
-**Modelo 2 - Informação do Usuário** Esse modelo armazena dados do perfil dos usuários que se registam na aplicação, sejam adotantes ou doadores:
+### **Relacionamentos:**
+- Relaciona-se com:
+  - **`Status`**: Informações de adoção do animal.
+  - **`UA`**: Interações do animal com os usuários.
+  - **`Visitas`**: Visitas agendadas para o animal.
+  - **`Favorite`**: Animais marcados como favoritos pelos usuários.
 
-  * Nome
-  * Foto de perfil
-  * Informações de contato (telefone, e-mail)
-  * Localização
-  * Histórico de adoções (caso o usuário já tenha adotado antes)
-  * Preferências de adoção (espécie, raça, idade desejada)
+---
 
-**Modelo 3 - Status de Adoção** Este modelo acompanha o status de cada adoção:
+## **Modelo 2 - Informações do Usuário**
+Este modelo armazena os dados dos usuários cadastrados na aplicação, sejam adotantes, doadores ou organizações.
 
-  * Atualizações de datas importantes (data de adoção, vacinação, etc.)
-  * Rastreamento do processo (por exemplo, se o animal já foi adotado ou vacinado)
-  * Comentários dos adotantes ou da organização sobre o processo de adoção
+### **Atributos:**
+- `usr_id`: Identificador único do usuário.
+- `usr_name`: Nome do usuário.
+- `usr_email`: E-mail para contato.
+- `usr_password`: Senha criptografada.
+- `usr_date_registered`: Data de registro na plataforma.
+- `usr_image`: URL da foto de perfil do usuário.
 
-**Modelo 4 - Doações** Armazena as informações sobre as doações feitas pelos usuários:
-  * Tipos de doação (ração, brinquedos, mantas, medicamentos)
-  * Valor de doação (no caso de doações em dinheiro)
-  * Perfil do doador
-  * Histórico de doações realizadas
+### **Relacionamentos:**
+- Relaciona-se com:
+  - **`Favorite`**: Animais favoritos do usuário.
+  - **`Visitas`**: Agendamentos de visitas realizadas pelo usuário.
+  - **`Donation`**: Doações realizadas pelo usuário.
+  - **`Post` e `Comment`**: Conteúdo gerado e interações com posts.
 
-**Modelo 5 - Marcações** Esta funcionalidade permite que os usuários agendem visitas ou encontros com a organização para adoção:
+---
 
-  * Data e hora da marcação
-  * Link direto para o WhatsApp, facilitando a comunicação com a organização
-  * Notificações para lembrar os usuários sobre datas e horários agendados
+## **Modelo 3 - Status de Adoção**
+Este modelo acompanha o progresso da adoção de um animal.
 
-**Modelo 6 - Lista de Favoritos** Este modelo permite que os usuários criem uma lista de animais favoritos, para que possam acompanhar aqueles que mais lhes interessam:
-  * Adição de animais à lista de favoritos
-  * Visualização rápida dos animais favoritos em uma aba separada
+### **Atributos:**
+- `sta_id`: Identificador único do status.
+- `sta_ani_id`: Identificador do animal.
+- `sta_first_visit`: Flag indicando se a primeira visita foi realizada.
+- `sta_adopter_evaluation`: Avaliação do adotante.
+- `sta_documentation`: Flag indicando se a documentação foi concluída.
+- `sta_adaptation_period`: Indica se o animal está em período de adaptação.
+- `sta_adoption_confirmed`: Confirmação da adoção.
+- `sta_follow_up`: Indica se o acompanhamento pós-adoção está ativo.
+- `sta_adopted`: Flag indicando se o animal foi adotado.
+- `sta_update_date`: Data da última atualização.
+- `sta_event_schedule`: Data/hora de eventos futuros.
+
+### **Relacionamentos:**
+- Relaciona-se com:
+  - **`Animal`**: O animal associado ao status.
+  - **`UAS`**: Ligação entre o status e os usuários envolvidos.
+
+---
+
+## **Modelo 4 - Doações**
+Este modelo registra as doações realizadas na plataforma.
+
+### **Atributos:**
+- `don_id`: Identificador único da doação.
+- `don_amount`: Valor da doação (se for monetária).
+- `don_payment_method`: Método de pagamento (MBWay, Cartão de Crédito, etc.).
+- `don_date`: Data da doação.
+- `don_usr_id`: Identificador do usuário doador.
+- `don_typ_name`: Tipo de doação (Financeira, Alimentos, Medicamentos, etc.).
+
+### **Relacionamentos:**
+- Relaciona-se com:
+  - **`User`**: Quem realizou a doação.
+  - **`Loc_Doa`**: Ponto de coleta associado à doação.
+
+---
+
+## **Modelo 5 - Marcações para Visitas**
+Este modelo permite agendar visitas para conhecer animais.
+
+### **Atributos:**
+- `visit_id`: Identificador único da visita.
+- `visit_usr_id`: Identificador do usuário que agendou.
+- `visit_ani_id`: Identificador do animal visitado.
+- `visit_date`: Data da visita.
+- `visit_time`: Hora da visita.
+- `visit_status`: Status da visita (ex: *Visita realizada*).
+
+### **Relacionamentos:**
+- Relaciona-se com:
+  - **`Animal`**: O animal visitado.
+  - **`User`**: Quem realizou a visita.
+
+---
+
+## **Modelo 6 - Lista de Favoritos**
+Este modelo permite que os usuários marquem animais como favoritos.
+
+### **Atributos:**
+- `fav_id`: Identificador único da relação de favorito.
+- `fav_usr_id`: Identificador do usuário que marcou o favorito.
+- `fav_ani_id`: Identificador do animal marcado como favorito.
+- `fav_date`: Data em que foi marcado como favorito.
+- `fav_usr_name`: Nome do usuário.
+- `fav_ani_name`: Nome do animal.
+
+### **Relacionamentos:**
+- Relaciona-se com:
+  - **`User`**: Quem marcou o favorito.
+  - **`Animal`**: O animal marcado como favorito.
+
+---
+
+## **Modelo 7 - Tabelas de Ligação**
+
+### **1. `UA` (Interações entre Usuário e Animal):**
+Rastreia interações como visitas, favoritos e adoções.
+
+#### **Atributos:**
+- `ua_id`: Identificador único.
+- `ua_usr_id`: Identificador do usuário.
+- `ua_ani_id`: Identificador do animal.
+- `ua_interaction_type`: Tipo de interação (*Favorited*, *Visited*, *Adopted*, etc.).
+
+---
+
+### **2. `UAS` (Ligação entre User, Animal e Status):**
+Registra as etapas do processo de adoção.
+
+#### **Atributos:**
+- `uas_id`: Identificador único.
+- `uas_usr_id`: Identificador do usuário.
+- `uas_ani_id`: Identificador do animal.
+- `uas_sta_id`: Identificador do status.
+- `uas_stage`: Estágio atual da adoção (*First Visit*, *Adoption Evaluation*, etc.).
+
+---
+
+### **3. `Loc_Doa` (Ligação entre Localização e Doação):**
+Rastreia as doações feitas em pontos específicos.
+
+#### **Atributos:**
+- `loc_id`: Identificador do ponto de doação.
+- `don_id`: Identificador da doação.
+- `usr_id`: Identificador do usuário doador.
+
+---
+
+## **Modelo 8 - Post e Comentários**
+Permite que usuários compartilhem histórias ou atualizações.
+
+### **Post:**
+- `post_id`: Identificador único.
+- `post_usr_id`: Identificador do autor.
+- `post_content`: Conteúdo do post.
+- `post_image_url`: URL da imagem associada.
+- `post_date`: Data de criação.
+- `post_time`: Hora de criação.
+- `post_views`: Contador de visualizações.
+
+---
+
+### **Comentário:**
+- `comment_id`: Identificador único.
+- `comment_post_id`: Post associado.
+- `comment_usr_id`: Autor do comentário.
+- `comment_content`: Conteúdo do comentário.
+- `comment_date`: Data de criação.
+- `comment_time`: Hora de criação.
+- `comment_reply_to`: Comentário ao qual este é uma resposta (se aplicável).
+
+---
+
+## **Modelo 9 - Notificações**
+Gerencia notificações enviadas para os usuários.
+
+### **Atributos:**
+- `notif_id`: Identificador único.
+- `notif_usr_id`: Identificador do usuário.
+- `notif_type`: Tipo da notificação (*Visit Reminder*, *Adoption Status Update*).
+- `notif_description`: Descrição da notificação.
+- `notif_date`: Data de envio.
+- `notif_time`: Hora de envio.
 
 ## 5.Público-Alvo 
 
