@@ -249,14 +249,34 @@ O público-alvo da AdoptMe é diversificado, englobando:
   * Doadores: Pessoas que desejam contribuir com a causa, seja por meio de doações em dinheiro ou bens (ração, mantas, brinquedos, etc.).
   * Amantes de animais: Pessoas que desejam acompanhar iniciativas de bem-estar animal e receber atualizações sobre animais resgatados e em adoção.
 
-## 6.Resultados esperados 
+# **6. Resultados Esperados**
 
-A aplicação **AdoptMe** será uma plataforma robusta que
-facilitará o processo de adoção de animais e doação de bens. Espera-se que o sistema permita:
+A aplicação **AdoptMe** será uma plataforma inovadora e eficiente que simplifica e otimiza o processo de adoção de animais e doação de bens. Com base nos recursos projetados, espera-se alcançar os seguintes resultados:
 
-  * Aumento da taxa de adoção de animais, tornando o processo mais acessível e organizado
-  * Incentivo à doação, com um sistema simples e transparente
-  * Melhor comunicação entre adotantes/doadores e a organização,através da integração com WhatsApp e notificações.
+## **1. Aumento da Taxa de Adoção de Animais**
+- Facilitação do processo de adoção com etapas bem definidas e rastreadas através do sistema de status de adoção.
+- Disponibilização de perfis detalhados dos animais (com imagens, descrições e filtros), permitindo que os adotantes encontrem rapidamente o animal que melhor se adequa às suas preferências.
+- Maior visibilidade e organização do histórico de interações, como visitas agendadas, avaliações e confirmações de adoção.
+
+## **2. Incentivo à Doação**
+- Sistema robusto e transparente para doações, abrangendo tanto bens materiais (ração, brinquedos, medicamentos) quanto contribuições financeiras.
+- Integração com pontos de coleta mapeados (tabela `Loc_Doa`), incentivando doações locais e ampliando o alcance da organização.
+- Registros detalhados de doações, permitindo que os usuários acompanhem o impacto de suas contribuições.
+
+## **3. Comunicação Eficiente**
+- Integração direta com o WhatsApp para facilitar a troca de informações entre os usuários e a organização.
+- Envio de notificações personalizadas para lembrar os usuários sobre visitas agendadas, atualizações no status de adoção ou eventos importantes.
+- Relatórios claros e atualizados sobre o progresso da adoção, garantindo transparência no processo.
+
+## **4. Engajamento e Comunidade**
+- Função de posts e comentários para que usuários compartilhem experiências de adoção, criando uma comunidade ativa e engajada.
+- Ferramenta de favoritos para permitir que os usuários acompanhem animais de interesse, aumentando as chances de adoção.
+
+## **5. Eficiência Organizacional**
+- Centralização e digitalização dos processos de adoção, doação e agendamento de visitas, reduzindo trabalho manual e erros operacionais.
+- Rastreamento de métricas como número de adoções, visitas realizadas e doações recebidas, ajudando na análise de impacto e planejamento estratégico.
+
+Com essas funcionalidades, o **AdoptMe** promete transformar a experiência de adoção e doação, beneficiando animais, adotantes, doadores e a organização.
 
 
 ## 8. Aplicações/plataformas semelhantes já existentes (em Portugal):
