@@ -309,67 +309,71 @@ Essas plataformas compartilham o mesmo propósito de facilitar o processo de ado
 
 **Caso de Utilização Core:** Adoção de um Animal
 
-**Descrição:** Este é o caso central da aplicação, onde o utilizador percorre o processo de adoção de um animal.
+### Descrição:
+Este é o caso central da aplicação, onde o utilizador percorre o processo de adoção de um animal.
 
-**Passos:**
+### Passos:
 
-  **1. Abertura da App:** O utilizador (Evandra) faz login ou registo na aplicação pela primeira vez.
-  
-  **2. Pesquisa de Animais:** Evandra usa a funcionalidade de pesquisa, aplicando filtros de preferência (espécie: cão, idade: filhote, localização: Lisboa).
-  
-  **3. Exploração:** A app exibe uma lista de animais disponíveis para adoção, com informações detalhadas como raça, idade, características e fotos.
-  
-  **4. Adicionar aos Favoritos:** Evandra encontra um cão do qual gosta e adiciona-o à sua lista de favoritos.
-  
-  **5. Agendamento de Visita:** Após refletir, Evandra decide marcar uma visita ao abrigo através do sistema de agendamento da app. Ela escolhe um horário e recebe um link para contacto via WhatsApp.
-  
-  **6. Notificações:** A app envia notificações para lembrar Evandra da data e hora agendadas.
-  
-  **7. Finalização do Processo:** Depois de visitar o abrigo e confirmar a adoção, a app atualiza o estado do animal, marcando-o como "adotado" no perfil de Evandra e fornecendo atualizações futuras sobre vacinação e saúde.
+1. **Abertura da App:**
+   - O utilizador (Evandra) faz login ou regista-se na aplicação pela primeira vez.
+   - A app solicita informações de login ou permite o registo com e-mail e senha.
+   - Evandra tem a opção de adicionar uma foto de perfil.
 
+2. **Pesquisa de Animais:**
+   - Evandra usa a funcionalidade de pesquisa, aplicando filtros de preferência (espécie: cão, idade: filhote, localização: Lisboa).
+   - A app exibe resultados com base nos filtros aplicados.
+   - Evandra pode ordenar por "Mais Recentes", "Mais Vistos" ou "Mais Favoritados".
 
-### **Caso de Utilização 2:** Doação de Bens
+3. **Exploração:**
+   - A app exibe uma lista de animais disponíveis para adoção, com informações detalhadas como raça, idade, características e fotos.
+   - Evandra pode ver perfis completos com descrição detalhada, histórico de saúde e estado de adoção.
 
-**Descrição:** Aqui, o utilizador utiliza a app para doar itens essenciais para os animais.
+4. **Adicionar aos Favoritos:**
+   - Evandra encontra um cão que gosta e adiciona-o à sua lista de favoritos.
+   - A opção de adicionar aos favoritos é destacada na página do animal.
+   - O cão é adicionado à aba de favoritos para fácil acesso posterior.
 
-**Passos:**
-  
-  **1. Navegação para Secção de Doações:** Wesley, um utilizador, faz login e
-  escolhe a opção de "Doar" no menu principal.
- 
-  **2. Escolha dos Itens:** Wesley seleciona os tipos de doação que pretende
-  fazer (ração e medicamentos).
- 
-  **3. Seleção de ponto de entrega/recolha:** A app mostra-lhe uma lista com
-  pontos de entrega e recolha próximos e ele seleciona um.
- 
-  **4. Finalização da Doação:** Wesley conclui o processo, recebendo uma
-  confirmação no e-mail e notificações na app sobre a doação e o seu impacto.
- 
-  **5. Histórico de Doações:** Wesley acede à sua secção de histórico para acompanhar as doações feitas ao longo do tempo.
+5. **Agendamento de Visita:**
+   - Após refletir, Evandra decide marcar uma visita ao abrigo através do sistema de agendamento da app. Ela escolhe um horário e recebe um link para contacto via WhatsApp.
+   - A app permite escolher a data e hora de uma visita com opções em tempo real.
+   - Evandra recebe um link direto para contato via WhatsApp com o abrigo.
+
+6. **Notificações:**
+   - A app envia notificações para lembrar Evandra da data e hora agendadas.
+   - A app envia lembretes 24h antes e 1h antes da visita.
+
+7. **Finalização do Processo:**
+   - Depois de visitar o abrigo e confirmar a adoção, a app atualiza o estado do animal, marcando-o como "adotado" no perfil de Evandra e fornecendo atualizações futuras sobre vacinação e saúde.
+   - O estado de adoção do animal é automaticamente atualizado na app.
+   - Evandra recebe notificações sobre futuras consultas de saúde do animal.
 
 
-### **Caso de Utilização 3:** Acompanhamento do Estado de Adoção
+## Caso de Utilização 2: Doação de Bens
 
-**Descrição:** Este caso foca-se em utilizadores que já adotaram um animal e
-desejam acompanhar o seu progresso.
+### Descrição:
+Neste caso de utilização, o utilizador utiliza a aplicação AdoptMe para doar itens essenciais para os animais.
 
-**Passos:**
+### Passos:
 
-  1. Login e Acesso ao Perfil do Animal: Silana, que adotou um gato pela app,
-  faz login e acede à secção "Adoções".
-  
-  2. Ver Atualizações de Saúde: A app mostra as últimas atualizações sobre o
-  estado de saúde do gato, incluindo datas de vacinação, check-ups e outros
-  cuidados veterinários.
-  
-  3. Notificações de Lembretes: A app envia notificações automáticas para
-  lembrar Silana das datas importantes relacionadas com os cuidados do
-  gato.
-  
-  4. Envio de Mensagens para o Abrigo: Silana utiliza o sistema de mensagens
-  integrado na app para contactar o abrigo e esclarecer dúvidas sobre o
-  estado de saúde do animal.
+1. **Navegação para Secção de Doações:**
+   - Wesley, um utilizador, faz login e escolhe a opção de "Doar" no menu principal.
+   - A opção de "Doação" é facilmente acessível no menu principal ou na tela inicial.
+
+2. **Escolha dos Itens:**
+   - Wesley seleciona os tipos de doação que pretende fazer (ração e medicamentos).
+   - A app exibe opções de itens mais comuns para doação (ração, brinquedos, medicamentos, etc.), e Wesley pode escolher a quantidade e o tipo.
+
+3. **Seleção de Ponto de Entrega/Recolha:**
+   - A app mostra-lhe uma lista com pontos de entrega e recolha próximos e ele seleciona um.
+   - A app usa a geolocalização para sugerir pontos de entrega próximos, com endereços e horários de funcionamento.
+
+4. **Finalização da Doação:**
+   - Wesley conclui o processo, recebendo uma confirmação no e-mail e notificações na app sobre a doação e o seu impacto.
+   - Wesley recebe uma mensagem de agradecimento e uma notificação de confirmação sobre a doação.
+
+5. **Histórico de Doações:**
+   - Wesley acede à sua secção de histórico para acompanhar as doações feitas ao longo do tempo.
+   - A app mantém um registro completo das doações passadas, com detalhes sobre os itens, data e local de entrega.
 
 ## 10. Contribuições das Unidades Curriculares 
 
@@ -397,3 +401,5 @@ Com esta unidade curricular nós pretendemos que ajude na parte de percentagens 
 Na imagem anexada, pode-se averiguar o nome das entidades e as suas correlações que iremos utilizar na BD (base de dados).
 
 <img width="450" alt="modelo de domínio" src="https://github.com/user-attachments/assets/458d5eaf-c618-40a5-8214-74fd94abc8a3">
+
+## 12. Diagrama de classes
