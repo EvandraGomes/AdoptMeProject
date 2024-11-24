@@ -1,6 +1,6 @@
 # TABELA User
 
-```sql
+```sql**
 CREATE TABLE User (
     usr_id INT AUTO_INCREMENT PRIMARY KEY,          
     usr_name VARCHAR(255) NOT NULL,                  
@@ -11,7 +11,7 @@ CREATE TABLE User (
 );**
 # TABELA Animal
 
-```sql
+```sql**
 CREATE TABLE Animal (
     ani_id INT AUTO_INCREMENT PRIMARY KEY,          
     ani_name VARCHAR(255) NOT NULL,                  
@@ -24,7 +24,7 @@ CREATE TABLE Animal (
 );**
 # TABELA Status
 
-```sql
+```sql**
 CREATE TABLE Status (
     sta_id INT AUTO_INCREMENT PRIMARY KEY,          
     sta_ani_id INT,                                 
@@ -41,7 +41,7 @@ CREATE TABLE Status (
 );**
 # TABELA Donation
 
-```sql
+```sql**
 CREATE TABLE Donation (
     don_id INT AUTO_INCREMENT PRIMARY KEY,
     don_amount DECIMAL(10, 2),
@@ -53,7 +53,7 @@ CREATE TABLE Donation (
 );
 # TABELA Favorite
 
-```sql
+```sql**
 CREATE TABLE Favorite (
     fav_id INT AUTO_INCREMENT PRIMARY KEY,
     fav_usr_id INT,
@@ -66,7 +66,7 @@ CREATE TABLE Favorite (
 );**
 # TABELA Loc
 
-```sql
+```sql**
 CREATE TABLE Loc (
     loc_id INT AUTO_INCREMENT PRIMARY KEY,
     loc_name VARCHAR(255) NOT NULL,
@@ -75,7 +75,7 @@ CREATE TABLE Loc (
 );**
 # TABELA Loc_Doa
 
-```sql
+```sql**
 CREATE TABLE Loc_Doa (
     loc_id INT,
     don_id INT,
@@ -87,7 +87,7 @@ CREATE TABLE Loc_Doa (
 );**
 # TABELA UA
 
-```sql
+```sql**
 CREATE TABLE UA (
     ua_id INT AUTO_INCREMENT PRIMARY KEY,
     ua_usr_id INT,
@@ -98,7 +98,7 @@ CREATE TABLE UA (
 );**
 # TABELA UAS
 
-```sql
+```sql**
 CREATE TABLE UAS (
     uas_id INT AUTO_INCREMENT PRIMARY KEY,
     uas_usr_id INT,
@@ -111,7 +111,7 @@ CREATE TABLE UAS (
 );**
 # TABELA Visitas
 
-```sql
+```sql**
 CREATE TABLE Visitas (
     visit_id INT AUTO_INCREMENT PRIMARY KEY,
     visit_usr_id INT,
@@ -124,7 +124,7 @@ CREATE TABLE Visitas (
 );**
 # TABELA Post
 
-```sql
+```sql**
 CREATE TABLE Post (
     post_id INT AUTO_INCREMENT PRIMARY KEY,
     post_usr_id INT,
@@ -137,7 +137,7 @@ CREATE TABLE Post (
 );**
 # TABELA Comment
 
-```sql
+```sql**
 CREATE TABLE Comment (
     comment_id INT AUTO_INCREMENT PRIMARY KEY,
     comment_post_id INT,
@@ -152,7 +152,7 @@ CREATE TABLE Comment (
 );**
 # TABELA Notifications
 
-```sql
+```sql**
 CREATE TABLE Notifications (
     notif_id INT AUTO_INCREMENT PRIMARY KEY,
     notif_usr_id INT,
