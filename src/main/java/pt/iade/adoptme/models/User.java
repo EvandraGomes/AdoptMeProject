@@ -4,8 +4,7 @@ import java.time.LocalDate;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "user") // é pra pegar a tabela 'user' na BD
-
+@Table(name = "user")  // Mapeando a tabela 'user' no banco de dados
 public class User {
 
     @Id
@@ -22,13 +21,13 @@ public class User {
     @Column(name = "usr_password")
     private String password;
 
-    @Column(name = "usr_date_registered")
+    @Column(name = "usr_date_registere")
     private LocalDate dateRegistered;
 
     // Construtor vazio
     public User() {}
 
-    // Métodos getter ➤ pra acessar os valores dos atributos privados de uma classe
+    // Métodos getter
     public int getId() {
         return id;
     }
@@ -49,8 +48,7 @@ public class User {
         return dateRegistered;
     }
 
-    // Métodos setter ➤ é pra mudar os valores dos atributos do get
-
+    // Métodos setter
     public void setId(int id) {
         this.id = id;
     }
@@ -71,4 +69,3 @@ public class User {
         this.dateRegistered = dateRegistered;
     }
 }
-
