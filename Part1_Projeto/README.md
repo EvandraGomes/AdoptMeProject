@@ -398,8 +398,8 @@ Com esta unidade curricular nós pretendemos que ajude na parte de percentagens 
 
 ## 11. Modelo de Domínio 
 
-Na imagem anexada, pode-se averiguar o nome das entidades e as suas correlações que iremos utilizar na BD (base de dados).
-
-<img width="450" alt="modelo de domínio" src="https://github.com/user-attachments/assets/458d5eaf-c618-40a5-8214-74fd94abc8a3">
+![MER_BD](https://github.com/user-attachments/assets/817785e9-4832-46aa-94ce-96af18989eb2)
 
 ## 12. Diagrama de classes
+
+![Diagrama de Classes](https://github.com/user-attachments/assets/9989a089-6f68-4e94-8114-a5f6be2ebe50)
