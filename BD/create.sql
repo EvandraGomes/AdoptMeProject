@@ -8,7 +8,7 @@ CREATE TABLE User (
     usr_password VARCHAR(255) NOT NULL,             
     usr_date_registered TIMESTAMP DEFAULT CURRENT_TIMESTAMP,  
     usr_image VARCHAR(255) -- Adicionando a coluna de imagem
-);
+);**
 # TABELA Animal
 
 ```sql
@@ -21,7 +21,7 @@ CREATE TABLE Animal (
     ani_breed VARCHAR(255),                         
     ani_type VARCHAR(255) NOT NULL,
     ani_image VARCHAR(255) -- Adicionando a coluna de imagem
-);
+);**
 # TABELA Status
 
 ```sql
@@ -38,7 +38,7 @@ CREATE TABLE Status (
     sta_update_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
     sta_event_schedule TIMESTAMP NULL,              
     FOREIGN KEY (sta_ani_id) REFERENCES Animal(ani_id)
-);
+);**
 # TABELA Donation
 
 ```sql
@@ -63,7 +63,7 @@ CREATE TABLE Favorite (
     fav_ani_name VARCHAR(255),  -- Adicionando o nome do animal
     FOREIGN KEY (fav_usr_id) REFERENCES User(usr_id),
     FOREIGN KEY (fav_ani_id) REFERENCES Animal(ani_id)
-);
+);**
 # TABELA Loc
 
 ```sql
@@ -72,7 +72,7 @@ CREATE TABLE Loc (
     loc_name VARCHAR(255) NOT NULL,
     loc_address VARCHAR(255) NOT NULL,
     loc_postal_code VARCHAR(10) NOT NULL
-);
+);**
 # TABELA Loc_Doa
 
 ```sql
@@ -84,7 +84,7 @@ CREATE TABLE Loc_Doa (
     FOREIGN KEY (loc_id) REFERENCES Loc(loc_id),
     FOREIGN KEY (don_id) REFERENCES Donation(don_id),
     FOREIGN KEY (usr_id) REFERENCES User(usr_id)
-);
+);**
 # TABELA UA
 
 ```sql
@@ -95,7 +95,7 @@ CREATE TABLE UA (
     ua_interaction_type ENUM('Favorited', 'Visited', 'Adopted', 'Hour'),
     FOREIGN KEY (ua_usr_id) REFERENCES User(usr_id),
     FOREIGN KEY (ua_ani_id) REFERENCES Animal(ani_id)
-);
+);**
 # TABELA UAS
 
 ```sql
@@ -108,7 +108,7 @@ CREATE TABLE UAS (
     FOREIGN KEY (uas_usr_id) REFERENCES User(usr_id),
     FOREIGN KEY (uas_ani_id) REFERENCES Animal(ani_id),
     FOREIGN KEY (uas_sta_id) REFERENCES Status(sta_id)
-);
+);**
 # TABELA Visitas
 
 ```sql
@@ -121,7 +121,7 @@ CREATE TABLE Visitas (
     visit_status VARCHAR(255) DEFAULT 'Visita realizada',
     FOREIGN KEY (visit_usr_id) REFERENCES User(usr_id),
     FOREIGN KEY (visit_ani_id) REFERENCES Animal(ani_id)
-);
+);**
 # TABELA Post
 
 ```sql
@@ -134,7 +134,7 @@ CREATE TABLE Post (
     post_time TIME,
     post_views INT DEFAULT 0,
     FOREIGN KEY (post_usr_id) REFERENCES User(usr_id)
-);
+);**
 # TABELA Comment
 
 ```sql
@@ -149,7 +149,7 @@ CREATE TABLE Comment (
     FOREIGN KEY (comment_post_id) REFERENCES Post(post_id),
     FOREIGN KEY (comment_usr_id) REFERENCES User(usr_id),
     FOREIGN KEY (comment_reply_to) REFERENCES Comment(comment_id)
-);
+);**
 # TABELA Notifications
 
 ```sql
@@ -161,4 +161,4 @@ CREATE TABLE Notifications (
     notif_date DATE,
     notif_time TIME,
     FOREIGN KEY (notif_usr_id) REFERENCES User(usr_id)
-);
+);**
