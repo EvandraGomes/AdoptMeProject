@@ -278,6 +278,20 @@ A aplicação **AdoptMe** será uma plataforma inovadora e eficiente que simplif
 
 Com essas funcionalidades, o **AdoptMe** promete transformar a experiência de adoção e doação, beneficiando animais, adotantes, doadores e a organização.
 
+# 7. Personas
+
+## Persona 1: Evandra, a Adotante
+
+Evandra tem 32 anos e trabalha como designer gráfico em Lisboa. Ela é uma pessoa dedicada ao bem-estar animal e está sempre buscando formas de ajudar os animais em necessidade, seja por meio de adoção, doações ou apoiando iniciativas sociais. Recentemente, Evandra foi incentivada por seu terapeuta a adotar um animal, como uma forma de melhorar seu bem-estar emocional e ajudar a reduzir a ansiedade. Ela acredita que a companhia de um animal pode oferecer suporte emocional e uma conexão mais profunda com o mundo ao seu redor.
+
+Na aplicação AdoptMe, Evandra procura cães filhotes, especialmente de raças pequenas e com menos de 2 anos, pois ela acredita que esse perfil se adaptaria melhor ao seu estilo de vida e ao seu lar. Ela usa os filtros de pesquisa para refinar as opções e aprecia poder visualizar imagens e descrições detalhadas de cada animal, assim como seu histórico de saúde. Evandra também valoriza a funcionalidade de adicionar animais aos favoritos, o que lhe permite comparar diferentes opções antes de tomar a decisão final. Quando encontra o animal ideal, ela marca uma visita ao abrigo e prefere que o agendamento seja facilitado por meio de um link direto para o WhatsApp, para uma comunicação mais ágil com os responsáveis. Ela também gosta de receber notificações pela app, mantendo-se informada sobre o progresso da adoção e sobre futuras atualizações relacionadas à saúde do animal.
+
+## Persona 2: Wesley, o Doador
+
+Wesley, de 45 anos, é empresário no Porto e tem uma vida bastante atarefada, mas dedica tempo para causas sociais que o tocam, especialmente as relacionadas ao bem-estar animal. Wesley é um defensor ativo das causas que envolvem o cuidado e a proteção dos animais. Ele foi incentivado a adotar por recomendação de seu terapeuta, que sugeriu que a companhia de um animal poderia ajudá-lo a lidar com o estresse e melhorar seu equilíbrio emocional. A adoção foi uma maneira de preencher um vazio emocional e, ao mesmo tempo, oferecer um lar a um animal carente.
+
+Na aplicação AdoptMe, Wesley utiliza frequentemente a funcionalidade de doação para contribuir com itens essenciais para os animais, como ração, medicamentos e brinquedos. Ele prefere soluções práticas e eficientes e se sente confortável usando a lista de pontos de coleta próximos para facilitar o processo de doação. Wesley também valoriza o histórico de suas doações na app, pois isso lhe permite acompanhar as contribuições que fez e ver o impacto positivo que elas geram. Para ele, a aplicação é uma ferramenta importante, pois oferece uma maneira simples e direta de fazer a diferença no bem-estar dos animais, sem que ele precise de grandes esforços para isso.
+
 
 ## 8. Aplicações/plataformas semelhantes já existentes (em Portugal):
 
