@@ -21,7 +21,7 @@ public class User {
     @Column(name = "usr_password")
     private String password;
 
-    @Column(name = "usr_date_registere")
+    @Column(name = "usr_date_registered")
     private LocalDate dateRegistered;
 
     // Construtor vazio

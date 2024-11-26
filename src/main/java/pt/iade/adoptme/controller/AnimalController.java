@@ -19,21 +19,21 @@ public class AnimalController {
     @Autowired
     private AnimalRepository animalRepository;
 
-    @GetMapping(path = "api/animals", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path = "", produces = MediaType.APPLICATION_JSON_VALUE)
     public Iterable<Animal> getAnimals(){
         logger.info("Mandando os animais");
 
         return animalRepository.findAll();
     }
-    @GetMapping(path = "/type/{type}", produces = MediaType.APPLICATION_JSON_VALUE)
-public Iterable<Animal> getAnimalstype(@PathVariable String type) {
-    logger.info("Filtrando os animais do tipo {}", type);
-    return animalRepository.findAllByType(type);
-}
-   /*  @GetMapping(path = "api/users", produces = MediaType.APPLICATION_JSON_VALUE)
-   public Iterable<User> getUsers() {
-     logger.info("Mandando os usuários");
-    return userRepository.findAll(); // Retorna todos os usuários
-    } */
-}
 
+    @GetMapping(path = "/type/{type}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Iterable<Animal> getAnimalsByType(@PathVariable String type) {
+        logger.info("Filtrar os animais do tipo {}", type);
+        if (type.equalsIgnoreCase("todos")) {
+            // Retorna todos os animais
+            return animalRepository.findAll();
+        }
+        return animalRepository.findAllByType(type);
+    }
+
+}

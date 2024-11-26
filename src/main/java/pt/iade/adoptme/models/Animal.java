@@ -23,8 +23,11 @@ public class Animal {
     @Column(name = "ani_description")
     private String description;
 
-    @Column(name = "ani_type")  // Adicionando a coluna para o tipo do animal
-    private String type;  // Tipo do animal, como "Cachorro", "Gato", etc.
+    @Column(name = "ani_type")
+    private String type;  // (cao, gato, passaro, coelho)
+
+    @Column(name = "ani_image")
+    private String image;
 
     // Construtor vazio
     public Animal() {
@@ -49,6 +52,8 @@ public class Animal {
 
     public String getDescription() {
         return description;
+
+
     }
 
     public String getType() {  // Getter para o tipo
@@ -67,6 +72,9 @@ public class Animal {
     public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
+    public String getImage() {
+        return image;
+    }
 
     public void setName(String name) {
         this.name = name;
@@ -78,5 +86,9 @@ public class Animal {
 
     public void setType(String type) {  // Setter para o tipo
         this.type = type;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }
