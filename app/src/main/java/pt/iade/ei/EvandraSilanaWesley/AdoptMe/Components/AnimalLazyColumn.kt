@@ -20,10 +20,10 @@ fun AnimalList(animals: List<Animal>) {
     ) {
         item {
 
-            Row(modifier = Modifier.padding(bottom = 4.dp)){ AnimalCategory("Gatos", R.drawable.gatocategory)
-                AnimalCategory("Caes", R.drawable.caocategory)
-                AnimalCategory("Aves", R.drawable.avecategory)
-                AnimalCategory("Coelhos", R.drawable.coelhocategory)
+            Row(modifier = Modifier.padding(bottom = 4.dp)){ AnimalCategory("gato", R.drawable.gatocategory)
+                AnimalCategory("cao", R.drawable.caocategory)
+                AnimalCategory("passaro", R.drawable.avecategory)
+                AnimalCategory("coelho", R.drawable.coelhocategory)
             }
         }
         items(animals) { animal ->

@@ -51,10 +51,10 @@ fun AnimalCategory(name: String, imageRes: Int) {
     @Composable
     fun AnimalCategoryPreview() {
         Row {
-            AnimalCategory("Gatos", R.drawable.gatocategory)
-            AnimalCategory("Cães", R.drawable.caocategory)
-            AnimalCategory("Aves", R.drawable.avecategory)
-            AnimalCategory("Coelhos", R.drawable.coelhocategory)
+            AnimalCategory("gato", R.drawable.gatocategory)
+            AnimalCategory("cao", R.drawable.caocategory)
+            AnimalCategory("passaro", R.drawable.avecategory)
+            AnimalCategory("coelho", R.drawable.coelhocategory)
         }
     }
 

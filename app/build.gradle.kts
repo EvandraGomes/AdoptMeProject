@@ -68,7 +68,7 @@ dependencies {
     implementation("com.github.kittinunf.fuel:fuel:2.3.1")
     implementation("com.github.kittinunf.fuel:fuel-android:2.3.1")
     implementation("com.github.kittinunf.fuel:fuel-json:2.3.1")
-    implementation("io.coil-kt:coil-compose:2.2.2")
+    implementation("io.coil-kt.coil3:coil-compose:3.0.4")
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

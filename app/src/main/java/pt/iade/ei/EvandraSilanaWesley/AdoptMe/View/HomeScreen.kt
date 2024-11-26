@@ -23,7 +23,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import pt.iade.ei.EvandraSilanaWesley.AdoptMe.Components.AnimalCard
 import pt.iade.ei.EvandraSilanaWesley.AdoptMe.Components.AnimalList
-import pt.iade.ei.EvandraSilanaWesley.AdoptMe.Components.getAnimalList
 import pt.iade.ei.EvandraSilanaWesley.AdoptMe.Controllers.AnimalCategoryController
 import pt.iade.ei.EvandraSilanaWesley.AdoptMe.Models.Animal
 import pt.iade.ei.EvandraSilanaWesley.AdoptMe.R
@@ -35,13 +34,13 @@ fun HomeScreen(navController: NavHostController) {
     val animals = remember { mutableStateOf<List<Animal>>(emptyList()) }
     val isLoading = remember { mutableStateOf(true) }
     val errorMessage = remember { mutableStateOf<String?>(null) }
-    val selectedCategory = remember { mutableStateOf("Gatos") } // Categoria inicial
+    val selectedCategory = remember { mutableStateOf("todos") } // Categoria inicial
 
     LaunchedEffect(Unit) {
         val controller = AnimalCategoryController()
 
         controller.fetchAnimalsByCategory(
-            category = "Gatos", // Passando a categoria desejada
+            category = if (selectedCategory.value == "todos") "" else selectedCategory.value,
             onResult = { fetchedAnimals ->
                 animals.value = fetchedAnimals
                 isLoading.value = false
@@ -124,16 +123,15 @@ fun HomeScreen(navController: NavHostController) {
     ) { paddingValues ->
         Box(modifier = Modifier.padding(paddingValues)) {
             ContentContainer {
-                // Se estivermos carregando, exiba o loading
                 if (isLoading.value) {
                     CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
                 } else if (errorMessage.value != null) {
                     Text("Erro: ${errorMessage.value}", color = Color.Red)
                 } else {
-                    // Caso contrário, exiba a lista de animais
+                    // Exibe a lista de animais da API
                     LazyColumn(modifier = Modifier.padding(16.dp)) {
                         items(animals.value) { animal ->
-                            AnimalCard(animal = animal)  // Passando o objeto animal
+                            AnimalCard(animal = animal)
                         }
                     }
                 }
@@ -142,8 +140,6 @@ fun HomeScreen(navController: NavHostController) {
     }
 }
 
-
-// Função para o fundo com bordas arredondadas
 @Composable
 fun ContentContainer(content: @Composable () -> Unit) {
     Box(
@@ -162,6 +158,5 @@ fun ContentContainer(content: @Composable () -> Unit) {
 @Preview(showBackground = true)
 @Composable
 fun HomeScreenPreview() {
-        HomeScreen(navController = rememberNavController())
-    }
-
+    HomeScreen(navController = rememberNavController())
+}

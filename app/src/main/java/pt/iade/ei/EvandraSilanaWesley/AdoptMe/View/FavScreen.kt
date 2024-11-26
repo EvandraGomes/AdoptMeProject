@@ -40,6 +40,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import coil3.compose.rememberAsyncImagePainter
 import pt.iade.ei.EvandraSilanaWesley.AdoptMe.Components.getAnimalList
 import pt.iade.ei.EvandraSilanaWesley.AdoptMe.Models.Animal
 import pt.iade.ei.EvandraSilanaWesley.AdoptMe.R
@@ -48,7 +49,7 @@ import pt.iade.ei.EvandraSilanaWesley.AdoptMe.ui.theme.Poppins
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun FavScreen(navController: NavController) {
+fun FavScreenContent(navController: NavController) {
     Scaffold(
         topBar = {
             TopAppBar(
@@ -67,7 +68,6 @@ fun FavScreen(navController: NavController) {
             )
         },
         content = { paddingValues ->
-            // Cor de fundo da tela
             Box(
                 modifier = Modifier
                     .fillMaxSize()
@@ -87,7 +87,6 @@ fun FavScreen(navController: NavController) {
 
 @Composable
 fun AnimalCardFav(animal: Animal) {
-
     Card(
         modifier = Modifier
             .width(328.dp)
@@ -101,16 +100,16 @@ fun AnimalCardFav(animal: Animal) {
             modifier = Modifier
                 .fillMaxSize()
         ) {
-
+            // Coloca o nome e a data do favorito no topo
             Column(
                 modifier = Modifier
-                    .align(Alignment.TopCenter) // alinhar o texto no topo
+                    .align(Alignment.TopCenter) // Alinha o texto no topo
                     .padding(top = 16.dp)
                     .fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = animal.name,
+                    text = animal.ani_name,
                     fontFamily = Poppins,
                     fontWeight = FontWeight.Bold,
                     color = Color.White,
@@ -124,32 +123,48 @@ fun AnimalCardFav(animal: Animal) {
                 )
             }
 
-            // A imagem do animal ocupando a parte inferior da Box
-            Image(
-                painter = painterResource(id = animal.imageResource[0]),
-                contentDescription = animal.name,
-                modifier = Modifier
-                    .size(230.dp)
-                    .height(100.dp)
-                    .align(Alignment.BottomCenter) // colocar a imagem na parte inferior
-                    .clip(RoundedCornerShape(20.dp)),
-                contentScale = ContentScale.Crop // pra a imagem se ajustar sem distorcer
+            // Lista de imagens (URL ou drawable)
+            val imageResources = listOfNotNull(
+                animal.ani_image.takeIf { it.isNotEmpty() }, // Se a URL não estiver vazia, inclui a URL
+                R.drawable.sem_foto.takeIf { animal.ani_image.isEmpty() } // Se não tiver URL, inclui o drawable
             )
 
+            // Percorrer a lista de imagens e exibir as imagens
+            imageResources.forEach { imageResource ->
+                // Verifica se a imagem é drawable ou URL
+                val painter = if (imageResource is Int) {
+                    painterResource(id = imageResource) // Se for drawable
+                } else {
+                    rememberAsyncImagePainter(imageResource as String) // Se for URL
+                }
+
+                Image(
+                    painter = painter,
+                    contentDescription = animal.ani_name,
+                    modifier = Modifier
+                        .size(230.dp)
+                        .height(100.dp)
+                        .align(Alignment.BottomCenter) // Coloca a imagem na parte inferior
+                        .clip(RoundedCornerShape(20.dp)),
+                    contentScale = ContentScale.Crop // Ajusta a imagem sem distorcer
+                )
+            }
+
+            // Coração favorito
             Image(
                 painter = painterResource(id = R.drawable.favheart),
                 contentDescription = "Coração Favorito",
                 modifier = Modifier
                     .size(80.dp)
                     .align(Alignment.BottomEnd)
-
             )
         }
     }
 }
 
+
 @Preview(showBackground = true)
 @Composable
 fun FavScreenPreview() {
-    FavScreen(navController = rememberNavController())
+    FavScreenContent(navController = rememberNavController())
 }

@@ -78,6 +78,7 @@ fun MenuScreenContent(navController: NavHostController) {
         }
 
         ItemComIcone("Favoritos", R.drawable.favoritos) {
+                navController.navigate("FavScreen")
         }
 
         ItemComIcone("Status", R.drawable.status) {

@@ -8,7 +8,7 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import pt.iade.ei.EvandraSilanaWesley.AdoptMe.Components.getAnimalList
+import coil3.compose.rememberAsyncImagePainter
 import pt.iade.ei.EvandraSilanaWesley.AdoptMe.Models.Animal
 import pt.iade.ei.EvandraSilanaWesley.AdoptMe.R
 import pt.iade.ei.EvandraSilanaWesley.AdoptMe.ui.theme.Poppins
@@ -37,11 +37,11 @@ fun AnimalDescriptionScreenContent(navController: NavController,
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Detalhes do Animal") },
+                title = { Text("") },
                 navigationIcon = {
-                    IconButton(onClick = onVoltarClick) {
+                    IconButton(onClick = { navController.popBackStack() }) {
                         Icon(
-                            imageVector = Icons.Filled.ArrowBack,
+                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                             contentDescription = "Voltar"
                         )
                     }
@@ -55,33 +55,31 @@ fun AnimalDescriptionScreenContent(navController: NavController,
                 modifier = Modifier.height(64.dp)
             ) {
                 Row(
-                    modifier = Modifier.fillMaxWidth(). background(Color.White).height(130.dp),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(Color.White)
+                        .height(130.dp),
                     horizontalArrangement = Arrangement.SpaceEvenly
                 ) {
                     Button(
                         onClick = { /* Ação do botão Favoritar */ },
                         colors = ButtonDefaults.buttonColors(
-                            containerColor = Color(0xFFE7B070) // Aqui definimos a cor de fundo do botão
+                            containerColor = Color(0xFFE7B070)
                         ),
                         modifier = Modifier
                             .padding(horizontal = 16.dp)
                             .padding(top = 8.dp)
-
-
                     ) {
                         Text("❤️", fontFamily = Poppins, color = Color.White)
                     }
                     Button(
                         onClick = { /* Ação do botão Adotar */ },
                         colors = ButtonDefaults.buttonColors(
-                            containerColor = Color(0xFFE7B070) // Aqui definimos a cor de fundo do botão
+                            containerColor = Color(0xFFE7B070)
                         ),
                         modifier = Modifier
                             .padding(horizontal = 16.dp)
                             .padding(top = 8.dp)
-
-
-
                     ) {
                         Text("ADOTAR", fontFamily = Poppins, color = Color.White)
                     }
@@ -94,7 +92,6 @@ fun AnimalDescriptionScreenContent(navController: NavController,
                 .padding(paddingValues)
                 .background(Color(0xFFF5E8D6))
                 .fillMaxSize(),
-
             horizontalAlignment = Alignment.Start
         ) {
             // Seção das imagens (LazyRow)
@@ -107,9 +104,16 @@ fun AnimalDescriptionScreenContent(navController: NavController,
                         .background(Color(0xFFE7B070), shape = RoundedCornerShape(20.dp)),
                     horizontalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    items(animal.imageResource) { imageRes ->
+                    items(listOfNotNull(animal.ani_image.ifEmpty { null } ?: R.drawable.sem_foto)) {  imageResource ->
+                        // Verifica se a imagem é drawable ou URL
+                        val painter = if ( imageResource is Int) {
+                            painterResource(id =  imageResource) // se for drawable
+                        } else {
+                            rememberAsyncImagePainter( imageResource as String) // se for URL
+                        }
+
                         Image(
-                            painter = painterResource(id = imageRes),
+                            painter = painter,
                             contentDescription = "Foto do Animal",
                             modifier = Modifier
                                 .size(260.dp)
@@ -121,11 +125,11 @@ fun AnimalDescriptionScreenContent(navController: NavController,
                 }
             }
 
-            // Nome, Gênero e Idade
+            // Detalhes do animal
             item {
                 Column(modifier = Modifier.padding(horizontal = 16.dp)) {
                     Text(
-                        text = animal.name,
+                        text = animal.ani_name,
                         fontFamily = Poppins,
                         fontWeight = FontWeight.Bold,
                         color = Color.Black,
@@ -133,7 +137,7 @@ fun AnimalDescriptionScreenContent(navController: NavController,
                         modifier = Modifier.padding(top = 16.dp)
                     )
                     Text(
-                        text = "Idade: ${animal.age}",
+                        text = "Idade: ${animal.ani_age}",
                         fontFamily = Poppins,
                         fontWeight = FontWeight.Bold,
                         color = Color.Black.copy(alpha = 0.7f),
@@ -141,7 +145,7 @@ fun AnimalDescriptionScreenContent(navController: NavController,
                         modifier = Modifier.padding(top = 8.dp)
                     )
                     Text(
-                        text = "Raça: ${animal.breed} anos",
+                        text = "Raça: ${animal.ani_breed}",
                         fontFamily = Poppins,
                         fontWeight = FontWeight.Bold,
                         color = Color.Black.copy(alpha = 0.7f),
@@ -151,10 +155,10 @@ fun AnimalDescriptionScreenContent(navController: NavController,
                 }
             }
 
-            // Descrição
+            // Descrição do animal
             item {
                 Text(
-                    text = animal.description,
+                    text = animal.ani_description,
                     style = MaterialTheme.typography.bodyMedium,
                     textAlign = TextAlign.Start,
                     fontFamily = Poppins,
@@ -168,16 +172,26 @@ fun AnimalDescriptionScreenContent(navController: NavController,
     }
 }
 
-
 @Preview(showBackground = true)
 @Composable
 fun AnimalDescriptionScreenContentPreview() {
-    val animalReal = getAnimalList()[0]  // Aqui estamos pegando o primeiro animal da lista real (Pituco)
+    val animalReal = Animal(
+        ani_id = 1,
+        ani_name = "Akíra",
+        ani_breed = "SRD",
+        ani_age = "3 anos",
+        ani_gender = "Feminino",
+        ani_description = "Akíra é uma cadelinha muito amável.",
+        imageResource = listOf(R.drawable.blackcat),
+        ani_image = "", // URL vazia, é suposto usar drawable
+        isFavorite = true,
+        ani_type = "gato",
+        favoriteDate = "2024-11-01"
+    )
 
     AnimalDescriptionScreenContent(
-        navController = rememberNavController(),  // Cria o NavController "fake"
-        animal = animalReal,  // Passa o animal real para a UI
-        onVoltarClick = { /* Função vazia para o Preview */ }
+        navController = rememberNavController(),
+        animal = animalReal,
+        onVoltarClick = { }
     )
 }
-

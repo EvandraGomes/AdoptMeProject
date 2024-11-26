@@ -49,9 +49,13 @@ class MainActivity : ComponentActivity() {
                     composable("DoacoesScreen") {
                         DoacoesScreenContent(navController = navController)
                     }
+                    composable("FavScreen"){
+                        FavScreenContent(navController = navController)
+
+                    }
                     composable("AnimalDescriptionScreen/{animalId}") { backStackEntry ->
                         val animalId = backStackEntry.arguments?.getString("animalId")?.toInt() ?: 0
-                        val animal = getAnimalList().find { it.id == animalId }
+                        val animal = getAnimalList().find { it.ani_id == animalId }
                         animal?.let {
                             AnimalDescriptionScreenContent(
                                 navController = navController,
