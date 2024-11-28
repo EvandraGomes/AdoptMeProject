@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import pt.iade.adoptme.models.Animal;
 import pt.iade.adoptme.models.repositories.AnimalRepository;
 
+import java.net.URL;
+
 @RestController
 @RequestMapping(path = "api/animals")
 public class AnimalController {
@@ -34,6 +36,25 @@ public class AnimalController {
             return animalRepository.findAll();
         }
         return animalRepository.findAllByType(type);
+    }
+    // esse é responsável por pegar a URL da BD e retornar a imagem no Android
+    @GetMapping(path = "/{id}/image", produces = MediaType.IMAGE_JPEG_VALUE)
+    public byte[] getAnimalImage(@PathVariable int id) {
+        logger.info("Buscando imagem do animal com ID {}", id);
+
+
+        Animal animal = animalRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Animal não encontrado"));
+
+        String imageUrl = animal.getImage();
+
+        try {
+            // supostamente faz o download da imagem com a URL
+            return new URL(imageUrl).openStream().readAllBytes();
+        } catch (Exception e) {
+            logger.error("Erro ao carregar imagem do animal: {}", e.getMessage());
+            throw new RuntimeException("Não foi possível carregar a imagem do animal");
+        }
     }
 
 }

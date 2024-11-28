@@ -2,14 +2,18 @@ package pt.iade.adoptme.models;
 
 import java.time.LocalDate;
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Data
+@NoArgsConstructor
 @Table(name = "user")  // Mapeando a tabela 'user' no banco de dados
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "usr_id")  // Supondo que a tabela 'user' tenha uma coluna para o ID
+    @Column(name = "usr_id")
     private int id;
 
     @Column(name = "usr_name")
@@ -24,48 +28,4 @@ public class User {
     @Column(name = "usr_date_registered")
     private LocalDate dateRegistered;
 
-    // Construtor vazio
-    public User() {}
-
-    // Métodos getter
-    public int getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public LocalDate getDateRegistered() {
-        return dateRegistered;
-    }
-
-    // Métodos setter
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setDateRegistered(LocalDate dateRegistered) {
-        this.dateRegistered = dateRegistered;
-    }
 }
