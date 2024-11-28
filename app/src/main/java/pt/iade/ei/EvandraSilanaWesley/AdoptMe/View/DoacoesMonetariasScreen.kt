@@ -29,7 +29,7 @@ import pt.iade.ei.EvandraSilanaWesley.AdoptMe.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DoacoesMonetariasScreen(navController: NavHostController) {
+fun DoacoesMonetariasScreenContent(navController: NavHostController) {
     Scaffold(
         topBar = {
             TopAppBar(
@@ -184,5 +184,5 @@ fun DoacoesMonetariasScreen(navController: NavHostController) {
 @Preview(showBackground = true)
 @Composable
 fun DoacoesMonetariasScreenPreview() {
-    DoacoesMonetariasScreen(navController = rememberNavController())
+    DoacoesMonetariasScreenContent(navController = rememberNavController())
 }

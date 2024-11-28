@@ -100,7 +100,7 @@ fun DoacoesScreenContent(navController: NavHostController) {
 
             // Botão de Doação Monetária centralizado
             Button(
-                onClick = { navController.navigate("doacoes_monetarias") },
+                onClick = { navController.navigate("DoacoesMonetariasScreen") },
                 modifier = Modifier
                     .fillMaxWidth(0.8f).padding(bottom = 50.dp)
                     .size(70.dp)

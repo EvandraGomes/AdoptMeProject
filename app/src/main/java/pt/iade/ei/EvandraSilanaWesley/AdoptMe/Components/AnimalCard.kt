@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -28,8 +29,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.painter.ColorPainter
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
+import coil3.compose.AsyncImage
+import coil3.compose.AsyncImagePainter
+import coil3.compose.AsyncImagePainter.State.Empty.painter
 import coil3.compose.rememberAsyncImagePainter
 import pt.iade.ei.EvandraSilanaWesley.AdoptMe.Models.Animal
 import pt.iade.ei.EvandraSilanaWesley.AdoptMe.R
@@ -39,12 +45,17 @@ import pt.iade.ei.EvandraSilanaWesley.AdoptMe.ui.theme.Poppins
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun AnimalCard(animal: Animal) {
+fun AnimalCard(animal: Animal, navController: NavController) {
     Row(
         modifier = Modifier
+            .clickable {
+                // navega para a tela de descrição pelo o ID do animal
+                navController.navigate("AnimalDescriptionScreen/${animal.ani_id}")
+            }
             .fillMaxWidth()
             .background(Color.White, shape = RoundedCornerShape(40.dp))
             .padding(0.dp),
+
         verticalAlignment = Alignment.CenterVertically
     ) {
         var imagePainter by remember { mutableStateOf<Painter?>(null) }
@@ -56,21 +67,18 @@ fun AnimalCard(animal: Animal) {
             painterResource(id = R.drawable.sem_foto) // Uma imagem genérica
         }
 
-        if (animal.ani_image.isNotEmpty()) {
-            // Use a URL se estiver disponível
-            rememberAsyncImagePainter(
-                model = animal.ani_image,
-                onSuccess = {
-                    imagePainter = it.painter
-                },
-                onError = {
-                    Log.e("AnimalCard Image", "Failed to load image from server for animal ${animal.ani_id} with URL ${animal.ani_image}")
-                }
-            )
-        }
+        val painterAsync = rememberAsyncImagePainter(
+            model = animal.ani_image,
+            onSuccess = {
+                imagePainter = it.painter
+            },
+            onError = {
+                Log.e("AnimalCard Image", "Failed to load image from server for animal ${animal.ani_id} with URL ${animal.ani_image}")
+            }
+        )
 
         Image(
-            painter = imagePainter!!,
+            painter = painterAsync,
             contentDescription = "Imagem de ${animal.ani_name}",
             modifier = Modifier
                 .size(150.dp)
@@ -109,7 +117,7 @@ fun AnimalCard(animal: Animal) {
                 text = "mais detalhes...",
                 fontSize = 14.sp,
                 fontFamily = Poppins,
-                color = Color(0xFFE7B070)
+                color = Color(0xFFE7B070),
             )
         }
     }
@@ -143,6 +151,7 @@ fun getAnimalList(): List<Animal> {
             isFavorite = true,
             ani_description = "Muito leal e amorosa."
         ),
+
     )
 }
 
@@ -150,7 +159,11 @@ fun getAnimalList(): List<Animal> {
 @Preview(showBackground = true)
 @Composable
 fun AnimalCardPreview() {
-    AnimalCard(Animal(
+    // Criação de um NavController Fake para o Preview
+    val fakeNavController = androidx.navigation.testing.TestNavHostController(androidx.compose.ui.platform.LocalContext.current)
+
+    // Exemplo de animal para o preview
+    val exampleAnimal = Animal(
         ani_id = 2,
         ani_name = "Akíra",
         ani_breed = "SRD",
@@ -162,6 +175,7 @@ fun AnimalCardPreview() {
         imageResource = listOf(R.drawable.blackcat),
         isFavorite = true,
         ani_description = "Muito leal e amorosa."
-    ))
-}
+    )
 
+    AnimalCard(animal = exampleAnimal, navController = fakeNavController)
+}

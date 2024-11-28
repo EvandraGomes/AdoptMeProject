@@ -1,3 +1,7 @@
+package pt.iade.ei.EvandraSilanaWesley.AdoptMe.Components
+
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -8,10 +12,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -23,11 +24,12 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import pt.iade.ei.EvandraSilanaWesley.AdoptMe.Components.AnimalCard
 import pt.iade.ei.EvandraSilanaWesley.AdoptMe.Components.AnimalCategory
-import pt.iade.ei.EvandraSilanaWesley.AdoptMe.Components.AnimalList
 import pt.iade.ei.EvandraSilanaWesley.AdoptMe.Controllers.AnimalCategoryController
 import pt.iade.ei.EvandraSilanaWesley.AdoptMe.Models.Animal
 import pt.iade.ei.EvandraSilanaWesley.AdoptMe.R
 import pt.iade.ei.EvandraSilanaWesley.AdoptMe.ui.theme.Poppins
+
+@RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(navController: NavHostController) {
@@ -166,7 +168,7 @@ fun HomeScreen(navController: NavHostController) {
                         verticalArrangement = Arrangement.spacedBy(12.dp) // Espaçamento entre os cards
                     ) {
                         items(animals.value) { animal ->
-                            AnimalCard(animal = animal)
+                            AnimalCard(animal = animal, navController = navController)
                         }
                     }
                 }
@@ -183,16 +185,16 @@ fun ContentContainer(modifier: Modifier = Modifier, content: @Composable () -> U
             .padding(top = 1.dp) // Para não sobrepor a TopAppBar
             .background(
                 color = Color(0xFFE7B070),
-
             )
     ) {
         content()
     }
 }
 
-
+@RequiresApi(Build.VERSION_CODES.O)
 @Preview(showBackground = true)
 @Composable
 fun HomeScreenPreview() {
+    // Usando rememberNavController() para o preview
     HomeScreen(navController = rememberNavController())
 }

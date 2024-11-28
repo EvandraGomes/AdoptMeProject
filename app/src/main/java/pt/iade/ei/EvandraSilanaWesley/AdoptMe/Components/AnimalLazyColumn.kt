@@ -1,5 +1,7 @@
 package pt.iade.ei.EvandraSilanaWesley.AdoptMe.Components
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import pt.iade.ei.EvandraSilanaWesley.AdoptMe.R
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
@@ -9,10 +11,13 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.testing.TestNavHostController
 import pt.iade.ei.EvandraSilanaWesley.AdoptMe.Models.Animal
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun AnimalList(animals: List<Animal>) {
     LazyColumn(
@@ -29,9 +34,11 @@ fun AnimalList(animals: List<Animal>) {
                 AnimalCategory("coelho", R.drawable.coelhocategory, onClick = {})
             }
         }
-        items(animals) { animal ->
 
-            AnimalCard(animal = animal)
+        items(animals) { animal ->
+            // Passando o navController fictício para o preview
+            val navController = TestNavHostController(LocalContext.current)
+            AnimalCard(animal = animal, navController = navController)
 
         }
 
@@ -39,6 +46,7 @@ fun AnimalList(animals: List<Animal>) {
     }
 
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Preview(showBackground = true)
 @Composable
 fun AnimalListPreview() {

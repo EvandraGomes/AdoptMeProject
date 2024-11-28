@@ -53,8 +53,8 @@ fun MenuScreenContent(navController: NavHostController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(1.dp)
-            .background(Color(0xFFF5E8D6))
+            .padding(1.dp, top = 10.dp)
+
     ) {
         Text(
             text = "AdoptMe",
@@ -70,24 +70,36 @@ fun MenuScreenContent(navController: NavHostController) {
 
 
         // Itens de navegação com navegação para cada rota
-        ItemComIcone("Adoção", R.drawable.adocao) {
+        ItemComIcone(
+            texto = "Adoção", iconeResId = R.drawable.adocao,
+        ) {
+            navController.navigate("AdocoesScreen")
         }
 
-        ItemComIcone("Doação", R.drawable.doacoes) {
+        ItemComIcone(
+            texto = "Doação", iconeResId = R.drawable.doacoes,
+        ) {
             navController.navigate("DoacoesScreen")
         }
 
-        ItemComIcone("Favoritos", R.drawable.favoritos) {
-                navController.navigate("FavScreen")
+        ItemComIcone(
+            texto = "Favoritos", iconeResId = R.drawable.favoritos
+        ) {
+            navController.navigate("FavScreen")
         }
 
-        ItemComIcone("Status", R.drawable.status) {
+        ItemComIcone(
+            texto = "Status", iconeResId = R.drawable.status
+        ) {
             navController.navigate("StatusScreen")
         }
 
-        ItemComIcone("Marcações", R.drawable.marcacoes) {
+        ItemComIcone(
+            texto = "Marcações", iconeResId = R.drawable.marcacoes
+        ) {
             navController.navigate("MarcacoesScreen")
         }
+
     }
 }
 

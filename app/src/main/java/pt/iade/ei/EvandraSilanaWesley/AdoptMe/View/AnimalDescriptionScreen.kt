@@ -52,13 +52,15 @@ fun AnimalDescriptionScreenContent(navController: NavController,
         bottomBar = {
             BottomAppBar(
                 containerColor = Color(0xFFF5E8D6),
-                modifier = Modifier.height(64.dp)
+                modifier = Modifier.height(120.dp)
+
             ) {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
                         .background(Color.White)
-                        .height(130.dp),
+                        .height(400.dp),
+
                     horizontalArrangement = Arrangement.SpaceEvenly
                 ) {
                     Button(
@@ -69,6 +71,8 @@ fun AnimalDescriptionScreenContent(navController: NavController,
                         modifier = Modifier
                             .padding(horizontal = 16.dp)
                             .padding(top = 8.dp)
+                            .height(60.dp)
+
                     ) {
                         Text("❤️", fontFamily = Poppins, color = Color.White)
                     }
@@ -80,6 +84,7 @@ fun AnimalDescriptionScreenContent(navController: NavController,
                         modifier = Modifier
                             .padding(horizontal = 16.dp)
                             .padding(top = 8.dp)
+                            .height(60.dp)
                     ) {
                         Text("ADOTAR", fontFamily = Poppins, color = Color.White)
                     }

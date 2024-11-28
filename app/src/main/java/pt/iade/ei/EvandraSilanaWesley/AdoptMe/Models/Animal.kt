@@ -19,18 +19,18 @@ data class Animal(
     val ani_description: String = ""
 ) {
 
-    // Função para converter a string de aniversário para LocalDate
+    // vai converter a string de aniversário para LocalDate
     @RequiresApi(Build.VERSION_CODES.O)
     fun getBirthdayAsLocalDate(): LocalDate {
-        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")  // Formato da data
-        return LocalDate.parse(ani_birthday, formatter)  // Converte a String para LocalDate
+        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+        return LocalDate.parse(ani_birthday, formatter)
     }
 
-    // Função para calcular a idade com base no aniversário
+    // calcular a idade com base no aniversário
     @RequiresApi(Build.VERSION_CODES.O)
     fun calculateAge(): String {
-        val birthday = getBirthdayAsLocalDate()  // Converte para LocalDate
-        val today = LocalDate.now()  // Data de hoje
+        val birthday = getBirthdayAsLocalDate()
+        val today = LocalDate.now()
 
         val ageInYears = today.year - birthday.year
         val ageInMonths = today.monthValue - birthday.monthValue

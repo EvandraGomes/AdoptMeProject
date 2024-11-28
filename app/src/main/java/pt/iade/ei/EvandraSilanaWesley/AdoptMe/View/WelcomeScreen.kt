@@ -24,16 +24,6 @@ import androidx.navigation.compose.rememberNavController
 import pt.iade.ei.EvandraSilanaWesley.AdoptMe.R
 import pt.iade.ei.EvandraSilanaWesley.AdoptMe.ui.theme.Poppins
 
-class WelcomeActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            val navController = rememberNavController()
-            WelcomeScreen(navController)
-        }
-    }
-}
-
 @Composable
 fun WelcomeScreen(navController: NavHostController) {
 
@@ -77,7 +67,7 @@ fun WelcomeScreen(navController: NavHostController) {
 
 
             Button(
-                onClick = { /* Navegar ou realizar ação */ },
+                onClick = { navController.navigate("HomeScreen")},
                 shape = RoundedCornerShape(50.dp),
                 colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFFE7B070)),
                 modifier = Modifier
