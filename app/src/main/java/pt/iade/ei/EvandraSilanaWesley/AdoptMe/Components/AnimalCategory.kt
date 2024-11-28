@@ -1,6 +1,7 @@
 package pt.iade.ei.EvandraSilanaWesley.AdoptMe.Components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
@@ -20,44 +21,42 @@ import pt.iade.ei.EvandraSilanaWesley.AdoptMe.R
 
 
 @Composable
-fun AnimalCategory(name: String, imageRes: Int) {
+fun AnimalCategory(name: String, imageRes: Int, onClick: () -> Unit) {
     Card(
         modifier = Modifier
             .padding(start = 10.dp)
-            .size(80.dp), // ajustar o tamanho do quadrado
+            .size(80.dp)
+            .clickable(onClick = onClick),
         colors = CardDefaults.cardColors(containerColor = Color.White),
         shape = RoundedCornerShape(15.dp),
         elevation = CardDefaults.cardElevation(5.dp)
     ) {
-        Box(
-            modifier = Modifier
-                .size(80.dp)
-        ) {
+        Box(modifier = Modifier.size(80.dp)) {
             Image(
                 painter = painterResource(id = imageRes),
                 contentDescription = "Imagem de ${name}",
                 modifier = Modifier
-                    .size(50.dp) // tamanho da imagem
+                    .size(50.dp)
                     .align(Alignment.Center),
                 contentScale = ContentScale.Fit
             )
         }
-
     }
 }
 
 
-
-    @Composable
-    fun AnimalCategoryPreview() {
-        Row {
-            AnimalCategory("gato", R.drawable.gatocategory)
-            AnimalCategory("cao", R.drawable.caocategory)
-            AnimalCategory("passaro", R.drawable.avecategory)
-            AnimalCategory("coelho", R.drawable.coelhocategory)
-        }
+@Composable
+fun AnimalCategoryPreview() {
+    Row {
+        AnimalCategory("gato", R.drawable.gatocategory, onClick = {})
+        AnimalCategory("cao", R.drawable.caocategory, onClick = {})
+        AnimalCategory("passaro", R.drawable.avecategory, onClick = {})
+        AnimalCategory("coelho", R.drawable.coelhocategory, onClick = {})
     }
+}
 
 @Preview(showBackground = true)
 @Composable
-fun AnimalCategory(){}
+fun AnimalCategoryPreviewWrapper() {
+    AnimalCategoryPreview()
+}

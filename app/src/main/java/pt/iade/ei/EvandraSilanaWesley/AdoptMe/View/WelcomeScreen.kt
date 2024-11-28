@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -35,87 +36,60 @@ class WelcomeActivity : ComponentActivity() {
 
 @Composable
 fun WelcomeScreen(navController: NavHostController) {
+
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFFF5E8D6)) // Cor de fundo
     ) {
+
+        Image(
+            painter = painterResource(id = R.drawable.tela_inicial),
+            contentDescription = "Imagem de fundo",
+            modifier = Modifier.fillMaxSize(),
+            contentScale = ContentScale.Crop // suppstamente reenderiza a imagem
+        )
         Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp),
-            horizontalAlignment = Alignment.Start,
-            verticalArrangement = Arrangement.SpaceBetween // espaçamento do top ao bottom
+            modifier = Modifier.fillMaxWidth(),
+            horizontalAlignment = Alignment.Start
         ) {
 
-            Column(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalAlignment = Alignment.Start
-            ) {
-                Text(
-                    text = "Welcome to\nAdoptMe!",
-                    fontSize = 35.sp,
-                    fontWeight = FontWeight.Bold,
-                    fontFamily = Poppins,
-                    color = Color(0xFFE7B070),
-                    textAlign = TextAlign.Start
-                )
-                Spacer(modifier = Modifier.height(8.dp))
-                Text(
-                    text = "O melhor amigo que procuras\nestá à espera de ti",
-                    fontSize = 16.sp,
-                    fontFamily = Poppins,
-                    color = Color.Black,
-                    textAlign = TextAlign.Start
-                )
-            }
+            Text(
+                text = "Welcome to\nAdoptMe!",
+                fontSize = 35.sp,
+                fontWeight = FontWeight.Bold,
+                fontFamily = Poppins,
+                color = Color(0xFFE7B070),
+                textAlign = TextAlign.Start,
+                modifier = Modifier.padding(start = 16.dp, top = 30.dp) // empurrar pra esquerda
+            )
+            Spacer(modifier = Modifier.height(8.dp))
 
 
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(300.dp), // Ajuste conforme necessário
-                contentAlignment = Alignment.BottomCenter
-            ) {
-                // Imagem da calopsita
-                Image(
-                    painter = painterResource(id = R.drawable.calopsita),
-                    contentDescription = "Calopsita",
-                    modifier = Modifier
-                        .size(80.dp)
-                        .offset(x = (-26).dp, y = (287).dp)
-                )
-                // Imagem do gato
-                Image(
-                    painter = painterResource(id = R.drawable.gatito),
-                    contentDescription = "Gato",
-                    modifier = Modifier
-                        .size(100.dp)
-                        .offset(x = (-57).dp, y = (397).dp)
-                )
-                // Imagem do cachorro
-                Image(
-                    painter = painterResource(id = R.drawable.cachorito),
-                    contentDescription = "Cachorro",
-                    modifier = Modifier
-                        .size(600.dp)
-                        .offset(x = 35.dp, y = (355).dp)
-                )
-            }
+            Text(
+                text = "O melhor amigo que procuras\nestá à espera de ti",
+                fontSize = 16.sp,
+                fontFamily = Poppins,
+                color = Color.Black,
+                textAlign = TextAlign.Start,
+                modifier = Modifier.padding(start = 16.dp)
+            )
+        }
 
-            // Botão "Get Started"
+
             Button(
                 onClick = { /* Navegar ou realizar ação */ },
                 shape = RoundedCornerShape(50.dp),
                 colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFFE7B070)),
                 modifier = Modifier
-                    .fillMaxWidth().padding(bottom = 50.dp)
-                    .height(50.dp)
+                    .fillMaxWidth()
+                    .padding(bottom = 50.dp)
+                    .height(70.dp)
                     .padding(horizontal = 32.dp)
+                    .align(Alignment.BottomCenter)
             ) {
                 Text(
                     text = "Get Started",
-                    fontSize = 18.sp,
+                    fontSize = 24.sp,
                     color = Color.White,
                     fontWeight = FontWeight.Bold,
                     fontFamily = Poppins
@@ -123,7 +97,7 @@ fun WelcomeScreen(navController: NavHostController) {
             }
         }
     }
-}
+
 
 @Preview(showBackground = true)
 @Composable

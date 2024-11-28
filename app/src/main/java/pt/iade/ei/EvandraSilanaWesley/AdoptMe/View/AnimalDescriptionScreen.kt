@@ -137,7 +137,7 @@ fun AnimalDescriptionScreenContent(navController: NavController,
                         modifier = Modifier.padding(top = 16.dp)
                     )
                     Text(
-                        text = "Idade: ${animal.ani_age}",
+                        text = "Idade: ${animal.ani_birthday}",
                         fontFamily = Poppins,
                         fontWeight = FontWeight.Bold,
                         color = Color.Black.copy(alpha = 0.7f),
@@ -179,7 +179,7 @@ fun AnimalDescriptionScreenContentPreview() {
         ani_id = 1,
         ani_name = "Akíra",
         ani_breed = "SRD",
-        ani_age = "3 anos",
+        ani_birthday = "2024-11-10",
         ani_gender = "Feminino",
         ani_description = "Akíra é uma cadelinha muito amável.",
         imageResource = listOf(R.drawable.blackcat),

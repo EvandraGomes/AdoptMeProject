@@ -9,6 +9,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import pt.iade.ei.EvandraSilanaWesley.AdoptMe.Models.Animal
 
@@ -18,12 +19,14 @@ fun AnimalList(animals: List<Animal>) {
         contentPadding = PaddingValues(vertical = 16.dp, horizontal = 8.dp),
         verticalArrangement = Arrangement.spacedBy(24.dp)
     ) {
+
         item {
 
-            Row(modifier = Modifier.padding(bottom = 4.dp)){ AnimalCategory("gato", R.drawable.gatocategory)
-                AnimalCategory("cao", R.drawable.caocategory)
-                AnimalCategory("passaro", R.drawable.avecategory)
-                AnimalCategory("coelho", R.drawable.coelhocategory)
+            Row(modifier = Modifier.padding(bottom = 4.dp)){
+                AnimalCategory("gato", R.drawable.gatocategory, onClick = {})
+                AnimalCategory("cao", R.drawable.caocategory, onClick = {})
+                AnimalCategory("passaro", R.drawable.avecategory, onClick = {})
+                AnimalCategory("coelho", R.drawable.coelhocategory, onClick = {})
             }
         }
         items(animals) { animal ->
@@ -34,4 +37,26 @@ fun AnimalList(animals: List<Animal>) {
 
         }
     }
+
+
+@Preview(showBackground = true)
+@Composable
+fun AnimalListPreview() {
+    AnimalList( animals = listOf(
+        Animal(
+            ani_id = 1,
+            ani_name = "Agatha",
+            ani_breed = "SRD",
+            ani_birthday = "2024-09-08",
+            ani_gender = "F",
+            ani_type = "coelho",
+            ani_image = "", // Sem URL
+            imageResource = listOf(R.drawable.coelhito2),
+            isFavorite = true,
+            favoriteDate = "há uma hora",
+            ani_description = "Coelha tímida, não gosta de água."
+        )
+    )
+    )
+}
 

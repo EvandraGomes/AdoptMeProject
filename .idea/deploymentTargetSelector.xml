@@ -8,16 +8,16 @@
       <SelectionState runConfigName="HomeScreenPreview (1)">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="DoacoesScreenPreview">
+      <SelectionState runConfigName="LoginScreenContentPreview">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="AnimalCategory">
+      <SelectionState runConfigName="SigninScreenContentPreview">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="FavScreenPreview">
+      <SelectionState runConfigName="AdocoesScreenContentPreview">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="AnimalDescriptionScreenContentPreview">
+      <SelectionState runConfigName="AnimalListPreview">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>

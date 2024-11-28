@@ -22,25 +22,26 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import pt.iade.ei.EvandraSilanaWesley.AdoptMe.Components.AnimalCard
+import pt.iade.ei.EvandraSilanaWesley.AdoptMe.Components.AnimalCategory
 import pt.iade.ei.EvandraSilanaWesley.AdoptMe.Components.AnimalList
 import pt.iade.ei.EvandraSilanaWesley.AdoptMe.Controllers.AnimalCategoryController
 import pt.iade.ei.EvandraSilanaWesley.AdoptMe.Models.Animal
 import pt.iade.ei.EvandraSilanaWesley.AdoptMe.R
 import pt.iade.ei.EvandraSilanaWesley.AdoptMe.ui.theme.Poppins
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(navController: NavHostController) {
     val animals = remember { mutableStateOf<List<Animal>>(emptyList()) }
     val isLoading = remember { mutableStateOf(true) }
     val errorMessage = remember { mutableStateOf<String?>(null) }
-    val selectedCategory = remember { mutableStateOf("todos") } // Categoria inicial
+    val selectedCategory = remember { mutableStateOf("todos") } // Mostrar inicialmente
 
-    LaunchedEffect(Unit) {
+    LaunchedEffect(selectedCategory.value) {
         val controller = AnimalCategoryController()
 
+        isLoading.value = true // Mostra o indicador de carregamento enquanto busca
         controller.fetchAnimalsByCategory(
-            category = if (selectedCategory.value == "todos") "" else selectedCategory.value,
+            category = selectedCategory.value,
             onResult = { fetchedAnimals ->
                 animals.value = fetchedAnimals
                 isLoading.value = false
@@ -62,7 +63,6 @@ fun HomeScreen(navController: NavHostController) {
                         horizontalAlignment = Alignment.CenterHorizontally,
                         verticalArrangement = Arrangement.Center
                     ) {
-                        // Texto "Location"
                         Text(
                             text = "Location",
                             fontSize = 14.sp,
@@ -70,7 +70,6 @@ fun HomeScreen(navController: NavHostController) {
                             color = Color.Gray
                         )
                         Spacer(modifier = Modifier.height(0.dp))
-
                         Row(
                             horizontalArrangement = Arrangement.Center,
                             verticalAlignment = Alignment.CenterVertically
@@ -121,15 +120,51 @@ fun HomeScreen(navController: NavHostController) {
             )
         }
     ) { paddingValues ->
-        Box(modifier = Modifier.padding(paddingValues)) {
-            ContentContainer {
+        ContentContainer(modifier = Modifier.padding(paddingValues)) {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(16.dp) // Para manter espaçamento geral
+            ) {
+                // Categorias de animais
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceEvenly
+                ) {
+                    AnimalCategory(name = "Gato", imageRes = R.drawable.gatocategory) {
+                        selectedCategory.value = "gato" // Atualiza a categoria
+                    }
+                    AnimalCategory(name = "Cão", imageRes = R.drawable.caocategory) {
+                        selectedCategory.value = "cao"
+                    }
+                    AnimalCategory(name = "Pássaro", imageRes = R.drawable.avecategory) {
+                        selectedCategory.value = "passaro"
+                    }
+                    AnimalCategory(name = "Coelho", imageRes = R.drawable.coelhocategory) {
+                        selectedCategory.value = "coelho"
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(16.dp)) // Espaço entre as categorias e os cards
+
+                // Conteúdo principal
                 if (isLoading.value) {
-                    CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+                    CircularProgressIndicator(
+                        modifier = Modifier
+                            .align(Alignment.CenterHorizontally)
+                            .padding(top = 20.dp)
+                    )
                 } else if (errorMessage.value != null) {
-                    Text("Erro: ${errorMessage.value}", color = Color.Red)
+                    Text(
+                        "Erro: ${errorMessage.value}",
+                        color = Color.Red,
+                        modifier = Modifier.align(Alignment.CenterHorizontally)
+                    )
                 } else {
-                    // Exibe a lista de animais da API
-                    LazyColumn(modifier = Modifier.padding(16.dp)) {
+                    LazyColumn(
+                        modifier = Modifier.fillMaxSize(),
+                        verticalArrangement = Arrangement.spacedBy(12.dp) // Espaçamento entre os cards
+                    ) {
                         items(animals.value) { animal ->
                             AnimalCard(animal = animal)
                         }
@@ -141,19 +176,20 @@ fun HomeScreen(navController: NavHostController) {
 }
 
 @Composable
-fun ContentContainer(content: @Composable () -> Unit) {
+fun ContentContainer(modifier: Modifier = Modifier, content: @Composable () -> Unit) {
     Box(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .padding(top = 1.dp) // Para não sobrepor a TopAppBar
             .background(
                 color = Color(0xFFE7B070),
-                shape = RoundedCornerShape(20.dp)
+
             )
     ) {
         content()
     }
 }
+
 
 @Preview(showBackground = true)
 @Composable
