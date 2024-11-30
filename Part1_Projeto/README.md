@@ -3,9 +3,9 @@
 ## EI/D01/2ºano/Grupo2:
 1. Evandra Gomes 20230416
 2. Silana Naval 20230306
-3. Wesley Vinhas 20220119
 
-Lisboa, aos 20/10/2024
+
+Lisboa, aos 24/11/2024
 
 **Universidade Europeia-IADE**
 
