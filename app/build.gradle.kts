@@ -68,7 +68,9 @@ dependencies {
     implementation("com.github.kittinunf.fuel:fuel:2.3.1")
     implementation("com.github.kittinunf.fuel:fuel-android:2.3.1")
     implementation("com.github.kittinunf.fuel:fuel-json:2.3.1")
-    implementation("io.coil-kt.coil3:coil-compose:3.0.4")
+    implementation ("io.coil-kt:coil-compose:2.4.0")
+
+
     implementation(libs.androidx.media3.common.ktx)
     implementation(libs.androidx.navigation.testing)
     testImplementation(libs.junit)

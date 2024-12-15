@@ -1,3 +1,4 @@
+
 package pt.iade.ei.EvandraSilanaWesley.AdoptMe.Components
 
 import android.os.Build
@@ -31,16 +32,15 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.painter.ColorPainter
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
-import coil3.compose.AsyncImage
-import coil3.compose.AsyncImagePainter
-import coil3.compose.AsyncImagePainter.State.Empty.painter
-import coil3.compose.rememberAsyncImagePainter
+import androidx.navigation.testing.TestNavHostController
+import coil.compose.rememberAsyncImagePainter
+import coil.compose.AsyncImagePainter
 import pt.iade.ei.EvandraSilanaWesley.AdoptMe.Models.Animal
 import pt.iade.ei.EvandraSilanaWesley.AdoptMe.R
 import pt.iade.ei.EvandraSilanaWesley.AdoptMe.ui.theme.Poppins
-
 
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -63,8 +63,7 @@ fun AnimalCard(animal: Animal, navController: NavController) {
             // Use o drawable local como fallback
             painterResource(id = animal.imageResource.first())
         } else {
-            // Caso nenhuma imagem exista
-            painterResource(id = R.drawable.sem_foto) // Uma imagem genérica
+            painterResource(id = R.drawable.sem_foto)
         }
 
         val painterAsync = rememberAsyncImagePainter(
@@ -122,6 +121,7 @@ fun AnimalCard(animal: Animal, navController: NavController) {
         }
     }
 }
+
 fun getAnimalList(): List<Animal> {
     return listOf(
         Animal(
@@ -152,7 +152,7 @@ fun getAnimalList(): List<Animal> {
             ani_description = "Muito leal e amorosa."
         ),
 
-    )
+        )
 }
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -160,7 +160,7 @@ fun getAnimalList(): List<Animal> {
 @Composable
 fun AnimalCardPreview() {
     // Criação de um NavController Fake para o Preview
-    val fakeNavController = androidx.navigation.testing.TestNavHostController(androidx.compose.ui.platform.LocalContext.current)
+    val fakeNavController = TestNavHostController(LocalContext.current)
 
     // Exemplo de animal para o preview
     val exampleAnimal = Animal(
