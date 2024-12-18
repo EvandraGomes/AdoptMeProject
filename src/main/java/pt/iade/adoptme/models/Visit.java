@@ -1,4 +1,4 @@
 package pt.iade.adoptme.models;
 
-public class Donation {
+public class Visit {
 }

@@ -1,5 +1,4 @@
 package pt.iade.adoptme.models;
 
-public class favorite {
-    
+public class Favorite {
 }

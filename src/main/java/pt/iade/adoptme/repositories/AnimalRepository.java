@@ -8,9 +8,12 @@ import java.util.List;
 
 @Repository
 public interface AnimalRepository extends CrudRepository<Animal, Integer> {
-    // Método automático baseado em query derivada
+    // Buscar todos os animais por tipo
     List<Animal> findAllByType(String type);
-   
+
+    // Buscar todos os animais por raça
+    List<Animal> findAllByBreed(String breed);
+
+    // Buscar todos os animais por gênero
+    List<Animal> findAllByGender(char gender);
 }
-
-
