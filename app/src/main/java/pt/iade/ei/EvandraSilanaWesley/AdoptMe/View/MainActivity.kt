@@ -1,6 +1,7 @@
 package pt.iade.ei.EvandraSilanaWesley.AdoptMe.View
 
 
+
 import ProfileScreenContent
 import WelcomeScreen
 import android.os.Build
@@ -11,14 +12,16 @@ import androidx.activity.enableEdgeToEdge
 import androidx.annotation.RequiresApi
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.marcacao.MarcacaoScreen
+import com.example.marcacao.MarcacoesScreen
+// import com.example.marcacao.MarcacaoScreen
 import com.example.statusscreen.StatusScreenContent
 import pt.iade.ei.EvandraSilanaWesley.AdoptMe.Components.HomeScreen
-import pt.iade.ei.EvandraSilanaWesley.AdoptMe.Components.getAnimalList
 import pt.iade.ei.EvandraSilanaWesley.AdoptMe.ui.theme.AdoptMeTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -30,6 +33,11 @@ class MainActivity : ComponentActivity() {
         setContent {
             AdoptMeTheme {
                 val navController = rememberNavController()
+                val context = LocalContext.current
+                val addFavorite: (Int, String) -> Unit = { animalId, token ->
+                    println("Animal com ID $animalId adicionado aos favoritos com o token $token")
+                }
+
                 NavHost(
                     navController = navController,
                     startDestination = "WelcomeScreen" // Tela inicial
@@ -38,53 +46,67 @@ class MainActivity : ComponentActivity() {
                         WelcomeScreen(navController = navController)
                     }
 
+                    composable("LoginScreen") {
+                        LoginScreenContent(navController = navController, context = context)
+                    }
+
+                    composable("BlogPostScreen") {
+                        BlogPostScreen(navController = navController)
+                    }
+
+                    composable("ProfileScreen") {
+                        ProfileScreenContent(navController = navController, context = context)
+                    }
+
                     composable("HomeScreen") {
                         HomeScreen(navController = navController)
                     }
 
+                    composable("SigninScreen") {
+                        SigninScreenContent(navController = navController)
+                    }
 
                     composable("MenuScreen") {
                         MenuScreenContent(navController = navController)
                     }
-                    composable("ProfileScreen") {
-                        ProfileScreenContent(navController = navController)
-                    }
-                    composable("MarcacoesScreen") {
-                        MarcacaoScreen(navController = navController)
+                    composable("MarcacoesScreen/{animalId}") { backStackEntry ->
+                        val animalId = backStackEntry.arguments?.getString("animalId")?.toIntOrNull() ?: 0
+                        MarcacoesScreen(navController = navController, animalId = animalId)
                     }
                     composable("StatusScreen") {
-                        StatusScreenContent(navController = navController)
+
+                        StatusScreenContent(navController = navController, taskStates = listOf(false, false, false, false, false, false, false))
                     }
+
+
                     composable("DoacoesScreen") {
                         DoacoesScreenContent(navController = navController)
                     }
                     composable("FavScreen") {
-                        FavScreenContent(navController = navController)
+                        FavScreenContent(context = LocalContext.current, navController = navController)
                     }
-                    composable("AdocoesScreen") {
-                        AdocoesScreenContent(navController = navController)
-                    }
+
                     composable("DoacoesMonetariasScreen") {
                         DoacoesMonetariasScreenContent(navController = navController)
                     }
 
                     composable("AnimalDescriptionScreen/{animalId}") { backStackEntry ->
                         val animalId = backStackEntry.arguments?.getString("animalId")?.toInt() ?: 0
-                        val animal = getAnimalList().find { it.ani_id == animalId }
-                        animal?.let {
-                            AnimalDescriptionScreenContent(
-                                navController = navController,
-                                animal = it,
-                                onVoltarClick = { navController.popBackStack() }
-                            )
-                        }
+                        AnimalDescriptionScreenContent(
+                            navController = navController,
+                            animalId = animalId,
+                            onVoltarClick = { navController.popBackStack() },
 
-                        }
+                        )
+                    }
+
+
+                }
                     }
                 }
             }
         }
-    }
+
 
 
 

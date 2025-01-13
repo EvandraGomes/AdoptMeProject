@@ -14,6 +14,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
@@ -48,12 +49,11 @@ fun DoacoesMonetariasScreenContent(navController: NavHostController) {
             )
         },
         content = { paddingValues ->
-            // paddingValues para lidar com o ajuste automático de espaçamento na tela
             Column(
                 modifier = Modifier
                     .fillMaxSize()
                     .background(Color(0xFFF5E8D6))
-                    .padding(paddingValues), // Aplica o padding do Scaffold
+                    .padding(paddingValues),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
@@ -61,7 +61,7 @@ fun DoacoesMonetariasScreenContent(navController: NavHostController) {
                 Text(
                     text = "Contribua Financeiramente",
                     fontSize = 25.sp,
-                    fontWeight = FontWeight.Bold,
+
                     color = Color.DarkGray,
                     modifier = Modifier.padding(top = 30.dp),
                     fontFamily = Poppins
@@ -69,18 +69,21 @@ fun DoacoesMonetariasScreenContent(navController: NavHostController) {
 
 
                 Row(
-                    modifier = Modifier.fillMaxWidth().padding(top = 70.dp).size(100.dp),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 70.dp)
+                        .size(100.dp),
                     horizontalArrangement = Arrangement.SpaceEvenly
                 ) {
                     val valores = listOf("10€", "20€", "50€")
                     valores.forEach { valor ->
                         Button(
                             onClick = { /* Lógica para selecionar valor */ },
-                            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFD9D9D9)),
+                            colors = ButtonDefaults.buttonColors(containerColor = Color.White),
                             modifier = Modifier
-                                .height(120.dp)
-                                .size(120.dp)
-                                .padding(4.dp),
+                                .height(90.dp) // Diminui a altura
+                                .padding(4.dp)
+                                .shadow(8.dp, RoundedCornerShape(12.dp)), // Adiciona sombra
                             shape = RoundedCornerShape(12.dp)
                         ) {
                             Text(
@@ -88,7 +91,6 @@ fun DoacoesMonetariasScreenContent(navController: NavHostController) {
                                 color = Color.Black,
                                 fontFamily = Poppins,
                                 fontSize = 30.sp,
-
                             )
                         }
                     }
@@ -99,27 +101,27 @@ fun DoacoesMonetariasScreenContent(navController: NavHostController) {
                 TextField(
                     value = outroValor.value,
                     onValueChange = { outroValor.value = it },
-                    label = { Text("Digite outro valor") },
+                    label = { Text("Digite outro valor" , fontFamily = Poppins) },
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                     modifier = Modifier
                         .fillMaxWidth(0.8f)
-                        .padding(top = 30.dp),
-
-                    )
-
-
+                        .padding(top = 30.dp)
+                        .shadow(4.dp, RoundedCornerShape(16.dp)), // Sombra e borda arredondada
+                    shape = RoundedCornerShape(16.dp),
+                    colors = TextFieldDefaults.textFieldColors(
+                        containerColor = Color.White
+                )
+                )
 
                 // Métodos de pagamento
                 Text(
                     text = "Escolha o método de pagamento:",
                     fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold,
+
                     color = Color.DarkGray,
                     fontFamily = Poppins,
                     modifier = Modifier.padding(top = 40.dp),
-
                 )
-
 
                 Row(
                     modifier = Modifier
@@ -135,7 +137,7 @@ fun DoacoesMonetariasScreenContent(navController: NavHostController) {
                     metodos.forEach { icon ->
                         Card(
                             modifier = Modifier
-                                .size(100.dp) // Aumentando o tamanho do Card
+                                .size(100.dp)
                                 .padding(8.dp),
                             colors = CardDefaults.cardColors(containerColor = Color.White),
                             shape = RoundedCornerShape(15.dp),
@@ -143,13 +145,13 @@ fun DoacoesMonetariasScreenContent(navController: NavHostController) {
                         ) {
                             Box(
                                 modifier = Modifier
-                                    .fillMaxSize(), // A Box preencherá o Card
+                                    .fillMaxSize(),
                                 contentAlignment = Alignment.Center
                             ) {
                                 Image(
                                     painter = painterResource(id = icon),
                                     contentDescription = null,
-                                    modifier = Modifier.size(70.dp), // Aumentando o tamanho da imagem
+                                    modifier = Modifier.size(70.dp),
                                     contentScale = ContentScale.Fit
                                 )
                             }
@@ -157,8 +159,7 @@ fun DoacoesMonetariasScreenContent(navController: NavHostController) {
                     }
                 }
 
-
-                Spacer(modifier = Modifier.weight(1f)) // Para empurrar o botão para baixo
+                Spacer(modifier = Modifier.weight(1f))
 
                 // Botão de confirmação
                 Button(
@@ -180,6 +181,7 @@ fun DoacoesMonetariasScreenContent(navController: NavHostController) {
         }
     )
 }
+
 
 @Preview(showBackground = true)
 @Composable

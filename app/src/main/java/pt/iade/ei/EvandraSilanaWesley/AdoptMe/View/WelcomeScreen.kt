@@ -50,9 +50,9 @@ fun WelcomeScreen(navController: NavHostController) {
                 fontFamily = Poppins,
                 color = Color(0xFFE7B070),
                 textAlign = TextAlign.Start,
-                modifier = Modifier.padding(start = 16.dp, top = 30.dp) // empurrar pra esquerda
+                modifier = Modifier.padding(start = 16.dp, top = 70.dp) // empurrar pra esquerda
             )
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(12.dp))
 
 
             Text(
@@ -66,26 +66,27 @@ fun WelcomeScreen(navController: NavHostController) {
         }
 
 
-            Button(
-                onClick = { navController.navigate("HomeScreen")},
-                shape = RoundedCornerShape(50.dp),
-                colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFFE7B070)),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 50.dp)
-                    .height(70.dp)
-                    .padding(horizontal = 32.dp)
-                    .align(Alignment.BottomCenter)
-            ) {
-                Text(
-                    text = "Get Started",
-                    fontSize = 24.sp,
-                    color = Color.White,
-                    fontWeight = FontWeight.Bold,
-                    fontFamily = Poppins
-                )
-            }
+        Button(
+            onClick = { navController.navigate("LoginScreen") },
+            shape = RoundedCornerShape(27.dp),
+            colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFFE7B070)),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 60.dp)
+                .height(60.dp)
+                .padding(horizontal = 32.dp)
+                .align(Alignment.BottomCenter)
+        ) {
+            Text(
+                text = "Login",
+                fontSize = 24.sp,
+                color = Color.White,
+                fontWeight = FontWeight.Bold,
+                fontFamily = Poppins
+            )
         }
+
+    }
     }
 
 

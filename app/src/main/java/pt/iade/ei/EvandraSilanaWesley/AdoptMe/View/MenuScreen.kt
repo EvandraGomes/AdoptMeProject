@@ -1,11 +1,10 @@
 package pt.iade.ei.EvandraSilanaWesley.AdoptMe.View
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.material.Divider
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.text.BasicText
+import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationDrawerItem
 import androidx.compose.material3.Text
@@ -24,7 +23,6 @@ import pt.iade.ei.EvandraSilanaWesley.AdoptMe.ui.theme.Poppins
 
 @Composable
 fun ItemComIcone(texto: String, iconeResId: Int, onClick: () -> Unit) {
-
     NavigationDrawerItem(
         icon = {
             Icon(
@@ -53,8 +51,7 @@ fun MenuScreenContent(navController: NavHostController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(1.dp, top = 10.dp)
-
+            .padding(1.dp, top = 30.dp)
     ) {
         Text(
             text = "AdoptMe",
@@ -68,16 +65,9 @@ fun MenuScreenContent(navController: NavHostController) {
 
         Divider()
 
-
-        // Itens de navegação com navegação para cada rota
+        // Outros itens de navegação aqui
         ItemComIcone(
-            texto = "Adoção", iconeResId = R.drawable.adocao,
-        ) {
-            navController.navigate("AdocoesScreen")
-        }
-
-        ItemComIcone(
-            texto = "Doação", iconeResId = R.drawable.doacoes,
+            texto = "Doação", iconeResId = R.drawable.doacoes
         ) {
             navController.navigate("DoacoesScreen")
         }
@@ -94,16 +84,23 @@ fun MenuScreenContent(navController: NavHostController) {
             navController.navigate("StatusScreen")
         }
 
-        ItemComIcone(
-            texto = "Marcações", iconeResId = R.drawable.marcacoes
-        ) {
-            navController.navigate("MarcacoesScreen")
-        }
 
+        Spacer(modifier = Modifier.weight(1f))
+        Text(
+            text = "About Us",
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxWidth()
+                .padding(bottom = 52.dp)
+                .clickable {
+                    navController.navigate("BlogPostScreen")
+                },
+            fontSize = 18.sp,
+            fontFamily = Poppins,
+            color = Color(0xFF4A4A4A)
+        )
     }
 }
-
-
 
 @Preview(showBackground = true)
 @Composable

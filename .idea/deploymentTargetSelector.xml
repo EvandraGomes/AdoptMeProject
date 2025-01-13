@@ -5,19 +5,19 @@
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="HomeScreenPreview (1)">
+      <SelectionState runConfigName="PreviewStatusScreen">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="LoginScreenContentPreview">
+      <SelectionState runConfigName="PreviewMarcacoesScreen">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="AdocoesScreenContentPreview">
+      <SelectionState runConfigName="DoacoesMonetariasScreenPreview">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="AnimalListPreview">
+      <SelectionState runConfigName="BlogPostScreenPreview">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="WelcomeScreenPreview">
+      <SelectionState runConfigName="PreviewTelaComItens">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>

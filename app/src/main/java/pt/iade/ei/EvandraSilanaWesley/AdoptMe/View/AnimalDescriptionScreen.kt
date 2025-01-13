@@ -1,21 +1,36 @@
 package pt.iade.ei.EvandraSilanaWesley.AdoptMe.View
 
+import android.content.Context
+import android.os.Build
+import android.util.Log
+import android.widget.Toast
+import androidx.annotation.RequiresApi
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
+import com.github.kittinunf.fuel.httpPost
+import com.github.kittinunf.fuel.json.responseJson
+import com.github.kittinunf.result.Result
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.scale
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -25,178 +40,275 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import coil.compose.rememberAsyncImagePainter
+import org.json.JSONObject
+import pt.iade.ei.EvandraSilanaWesley.AdoptMe.Controllers.AnimalDetailsController
 import pt.iade.ei.EvandraSilanaWesley.AdoptMe.Models.Animal
 import pt.iade.ei.EvandraSilanaWesley.AdoptMe.R
 import pt.iade.ei.EvandraSilanaWesley.AdoptMe.ui.theme.Poppins
 
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AnimalDescriptionScreenContent(navController: NavController,
-                                   animal: Animal,
-                                   onVoltarClick: () -> Unit) {
-    Scaffold(
-        topBar = {
+fun AnimalDescriptionScreenContent(
+    navController: NavController,
+    animalId: Int,
+    onVoltarClick: () -> Unit
+) {
+    val context = LocalContext.current
+    val controller = AnimalDetailsController()
+    val animal = remember { mutableStateOf<Animal?>(null) }
+    val isFavorite = remember { mutableStateOf(false) }
+
+    LaunchedEffect(animalId) {
+        animal.value = controller.fetchAnimalDetails(animalId)
+    }
+
+    animal.value?.let { animalData ->
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color(0xFFF5E8D6))
+        ) {
+            // TopBar
             TopAppBar(
-                title = { Text("") },
+                title = {
+                    Text(
+                        text = "Detalhes do Animal",
+                        fontFamily = Poppins,
+                        fontWeight = FontWeight.Bold,
+                        color = Color.White
+                    )
+                },
                 navigationIcon = {
-                    IconButton(onClick = { navController.popBackStack() }) {
+                    IconButton(onClick = { onVoltarClick() }) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Voltar"
+                            contentDescription = "Voltar",
+                            tint = Color.White
                         )
                     }
                 },
-                colors = TopAppBarDefaults.topAppBarColors(containerColor = Color(0xFFF5E8D6))
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = Color(0xFFF5E8D6)
+                )
             )
-        },
-        bottomBar = {
-            BottomAppBar(
-                containerColor = Color(0xFFF5E8D6),
-                modifier = Modifier.height(120.dp)
 
+            LazyColumn(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(top = 56.dp) // Espaço para a Top Bar
             ) {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .background(Color.White)
-                        .height(400.dp),
-
-                    horizontalArrangement = Arrangement.SpaceEvenly
-                ) {
-                    Button(
-                        onClick = { /* Ação do botão Favoritar */ },
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = Color(0xFFE7B070)
-                        ),
+                item {
+                    // Imagem do animal
+                    Image(
+                        painter = rememberAsyncImagePainter(animalData.ani_image),
+                        contentDescription = "Foto do Animal",
                         modifier = Modifier
-                            .padding(horizontal = 16.dp)
-                            .padding(top = 8.dp)
-                            .height(60.dp)
-
-                    ) {
-                        Text("❤️", fontFamily = Poppins, color = Color.White)
-                    }
-                    Button(
-                        onClick = { /* Ação do botão Adotar */ },
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = Color(0xFFE7B070)
-                        ),
-                        modifier = Modifier
-                            .padding(horizontal = 16.dp)
-                            .padding(top = 8.dp)
-                            .height(60.dp)
-                    ) {
-                        Text("ADOTAR", fontFamily = Poppins, color = Color.White)
-                    }
+                            .fillMaxWidth()
+                            .height(275.dp)
+                            .clip(RoundedCornerShape(bottomStart = 50.dp, bottomEnd = 50.dp)),
+                        contentScale = ContentScale.Crop
+                    )
                 }
-            }
-        }
-    ) { paddingValues ->
-        LazyColumn(
-            modifier = Modifier
-                .padding(paddingValues)
-                .background(Color(0xFFF5E8D6))
-                .fillMaxSize(),
-            horizontalAlignment = Alignment.Start
-        ) {
-            // Seção das imagens (LazyRow)
-            item {
-                LazyRow(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(300.dp)
-                        .padding(16.dp)
-                        .background(Color(0xFFE7B070), shape = RoundedCornerShape(20.dp)),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    items(listOfNotNull(animal.ani_image.ifEmpty { null } ?: R.drawable.sem_foto)) {  imageResource ->
-                        // Verifica se a imagem é drawable ou URL
-                        val painter = if ( imageResource is Int) {
-                            painterResource(id =  imageResource) // se for drawable
-                        } else {
-                            rememberAsyncImagePainter( imageResource as String) // se for URL
-                        }
+
+                item {
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    // Nome e botão de favorito
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 16.dp, vertical = 8.dp),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = animalData.ani_name,
+                            fontFamily = Poppins,
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 24.sp,
+                            color = Color.Black
+                        )
 
                         Image(
-                            painter = painter,
-                            contentDescription = "Foto do Animal",
+                            painter = rememberAsyncImagePainter(
+                                model = if (isFavorite.value) R.drawable.favoritado else R.drawable.favoritar
+                            ),
+                            contentDescription = "Favoritar",
                             modifier = Modifier
-                                .size(260.dp)
-                                .padding(8.dp)
-                                .clip(RoundedCornerShape(20.dp)),
-                            contentScale = ContentScale.Crop
+                                .size(40.dp)
+                                .clip(CircleShape)
+                                .clickable {
+                                    isFavorite.value = !isFavorite.value
+                                    handleFavorite(animalData.ani_id, context,
+                                        onResult = { result ->
+                                            Log.d("Favorito", result)
+                                        },
+                                        onError = { error ->
+                                            Log.e("Favorito", error)
+                                        }
+                                    )
+                                }
+                                .shadow(8.dp, CircleShape)
+                                .scale(animateFloatAsState(if (isFavorite.value) 1.2f else 1f).value)
                         )
                     }
                 }
-            }
 
-            // Detalhes do animal
-            item {
-                Column(modifier = Modifier.padding(horizontal = 16.dp)) {
+                item {
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    // Detalhes do animal (Idade, Raça, etc.)
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 16.dp),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        // Idade
+                        Column(
+                            modifier = Modifier
+                                .clip(RoundedCornerShape(10.dp))
+                                .background(Color.White)
+                                .padding(16.dp)
+                                .weight(1f),
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            Text(
+                                text = "Idade",
+                                fontFamily = Poppins,
+                                fontWeight = FontWeight.Bold,
+                                fontSize = 14.sp,
+                                color = Color.Black
+                            )
+                            Text(
+                                text = animalData.ani_birthday,
+                                fontFamily = Poppins,
+                                fontSize = 12.sp,
+                                color = Color.Black.copy(alpha = 0.7f)
+                            )
+                        }
+
+                        Spacer(modifier = Modifier.width(8.dp))
+
+                        // Raça
+                        Column(
+                            modifier = Modifier
+                                .clip(RoundedCornerShape(10.dp))
+                                .background(Color.White)
+                                .padding(16.dp)
+                                .weight(1f),
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            Text(
+                                text = "Raça",
+                                fontFamily = Poppins,
+                                fontWeight = FontWeight.Bold,
+                                fontSize = 14.sp,
+                                color = Color.Black
+                            )
+                            Text(
+                                text = animalData.ani_breed,
+                                fontFamily = Poppins,
+                                fontSize = 12.sp,
+                                color = Color.Black.copy(alpha = 0.7f)
+                            )
+                        }
+                    }
+                }
+
+                item {
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    // Descrição do animal
                     Text(
-                        text = animal.ani_name,
+                        text = animalData.ani_description,
                         fontFamily = Poppins,
-                        fontWeight = FontWeight.Bold,
-                        color = Color.Black,
-                        fontSize = 24.sp,
-                        modifier = Modifier.padding(top = 16.dp)
-                    )
-                    Text(
-                        text = "Idade: ${animal.ani_birthday}",
-                        fontFamily = Poppins,
-                        fontWeight = FontWeight.Bold,
-                        color = Color.Black.copy(alpha = 0.7f),
                         fontSize = 14.sp,
-                        modifier = Modifier.padding(top = 8.dp)
-                    )
-                    Text(
-                        text = "Raça: ${animal.ani_breed}",
-                        fontFamily = Poppins,
-                        fontWeight = FontWeight.Bold,
+                        textAlign = TextAlign.Start,
                         color = Color.Black.copy(alpha = 0.7f),
-                        fontSize = 14.sp,
-                        modifier = Modifier.padding(top = 8.dp)
+                        modifier = Modifier.padding(16.dp)
                     )
                 }
-            }
 
-            // Descrição do animal
-            item {
-                Text(
-                    text = animal.ani_description,
-                    style = MaterialTheme.typography.bodyMedium,
-                    textAlign = TextAlign.Start,
-                    fontFamily = Poppins,
-                    color = Color.Black.copy(alpha = 0.7f),
-                    modifier = Modifier
-                        .padding(16.dp)
-                        .fillMaxWidth()
-                )
+                item {
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    // Botão "Adotar"
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 40.dp, vertical = 150.dp)
+                    ) {
+                        Button(
+                            onClick = {
+                                navController.navigate("MarcacoesScreen/${animalData.ani_id}")
+                            },
+                            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFE7B070)),
+                            shape = RoundedCornerShape(16.dp),
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(60.dp)
+                                .shadow(8.dp, RoundedCornerShape(16.dp))
+                        ) {
+                            Text(
+                                text = "ADOTAR",
+                                fontFamily = Poppins,
+                                fontWeight = FontWeight.Bold,
+                                color = Color.Black,
+                                fontSize = 18.sp
+                            )
+                        }
+                    }
+                }
             }
         }
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun AnimalDescriptionScreenContentPreview() {
-    val animalReal = Animal(
-        ani_id = 1,
-        ani_name = "Akíra",
-        ani_breed = "SRD",
-        ani_birthday = "2024-11-10",
-        ani_gender = "Feminino",
-        ani_description = "Akíra é uma cadelinha muito amável.",
-        imageResource = listOf(R.drawable.blackcat),
-        ani_image = "", // URL vazia, é suposto usar drawable
-        isFavorite = true,
-        ani_type = "gato",
-        favoriteDate = "2024-11-01"
-    )
+fun handleFavorite(animalId: Int, context: Context, onResult: (String) -> Unit, onError: (String) -> Unit) {
+    val sharedPreferences = context.getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+    val token = sharedPreferences.getString("user_token", "") ?: ""
 
-    AnimalDescriptionScreenContent(
-        navController = rememberNavController(),
-        animal = animalReal,
-        onVoltarClick = { }
-    )
+    if (token.isEmpty()) {
+        onError("Token não encontrado.")
+        return
+    }
+
+    val url = "http://10.0.2.2:8080/api/favorites/add"
+
+    // Criando o corpo da requisição JSON (estrutura com animalId dentro de um objeto)
+    val json = JSONObject().apply {
+        put("animalId", JSONObject().apply {
+            put("id", animalId)
+        })
+    }
+
+    // Log para depurar a requisição
+    Log.d("Favorito", "Requisição para: $url com corpo: $json")
+
+    // Fazendo a requisição POST com os dados
+    url.httpPost()
+        .body(json.toString())
+        .header("Content-Type" to "application/json")
+        .header("Authorization" to "Bearer $token")  // Enviar o token no cabeçalho
+        .responseJson { _, _, result ->
+            when (result) {
+                is Result.Success -> {
+                    val response = result.value.obj()
+                    val responseMessage = response.optString("message", "")
+                    if (responseMessage.isNotEmpty()) {
+                        onResult(responseMessage)  // Caso o backend retorne uma mensagem de sucesso
+                    } else {
+                        onError("Erro ao favoritar o animal.")
+                    }
+                }
+
+                is Result.Failure -> {
+                    val errorMsg = result.error.message ?: "Erro desconhecido"
+                    Log.e("Favorito", "Erro na requisição: $errorMsg")
+                    onError(errorMsg)
+                }
+            }
+        }
 }

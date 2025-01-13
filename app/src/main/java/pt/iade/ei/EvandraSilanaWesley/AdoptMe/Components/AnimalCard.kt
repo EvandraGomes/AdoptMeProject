@@ -43,21 +43,19 @@ import pt.iade.ei.EvandraSilanaWesley.AdoptMe.R
 import pt.iade.ei.EvandraSilanaWesley.AdoptMe.ui.theme.Poppins
 
 
-@RequiresApi(Build.VERSION_CODES.O)
-@Composable
+@RequiresApi(Build.VERSION_CODES.O)@Composable
 fun AnimalCard(animal: Animal, navController: NavController) {
     Row(
         modifier = Modifier
             .clickable {
-                // navega para a tela de descrição pelo o ID do animal
+                // Navega para a tela de descrição, passando o ID do animal
                 navController.navigate("AnimalDescriptionScreen/${animal.ani_id}")
             }
             .fillMaxWidth()
             .background(Color.White, shape = RoundedCornerShape(40.dp))
             .padding(0.dp),
-
         verticalAlignment = Alignment.CenterVertically
-    ) {
+    )  {
         var imagePainter by remember { mutableStateOf<Painter?>(null) }
         imagePainter = if (animal.imageResource.isNotEmpty()) {
             // Use o drawable local como fallback

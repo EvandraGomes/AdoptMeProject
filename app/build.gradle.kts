@@ -10,7 +10,7 @@ android {
     defaultConfig {
         applicationId = "pt.iade.ei.EvandraSilanaWesley.AdoptMe"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 33
         versionCode = 1
         versionName = "1.0"
 
@@ -47,10 +47,10 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -68,11 +68,26 @@ dependencies {
     implementation("com.github.kittinunf.fuel:fuel:2.3.1")
     implementation("com.github.kittinunf.fuel:fuel-android:2.3.1")
     implementation("com.github.kittinunf.fuel:fuel-json:2.3.1")
-    implementation ("io.coil-kt:coil-compose:2.4.0")
+    implementation ("io.coil-kt:coil-compose:2.3.0")
+    implementation ("org.osmdroid:osmdroid-android:6.1.14")
+    //para serialização/deserialização JSON
+    implementation ("com.squareup.moshi:moshi:1.15.0")
+    implementation ("com.squareup.moshi:moshi-kotlin:1.15.0")
+    implementation ("com.github.kittinunf.fuel:fuel-moshi:2.3.1")
 
+    implementation ("com.google.android.material:material:1.5.0")
+    implementation ("androidx.compose.material:material:1.1.1")
+    implementation ("androidx.compose.ui:ui:1.1.1")
+    implementation ("androidx.compose.runtime:runtime:1.1.1")
+    implementation ("androidx.compose.foundation:foundation:1.1.1")
+
+    implementation ("androidx.compose.material3:material3:1.0.0")
+    implementation ("androidx.compose.foundation:foundation:1.0.0")
+    implementation ("androidx.compose.ui:ui:1.0.0")
 
     implementation(libs.androidx.media3.common.ktx)
     implementation(libs.androidx.navigation.testing)
+    implementation(libs.firebase.firestore.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

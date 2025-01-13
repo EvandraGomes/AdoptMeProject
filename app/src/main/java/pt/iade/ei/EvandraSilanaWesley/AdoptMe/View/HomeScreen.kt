@@ -66,7 +66,7 @@ fun HomeScreen(navController: NavHostController) {
                         verticalArrangement = Arrangement.Center
                     ) {
                         Text(
-                            text = "Location",
+                            text = "Instituto Vida Animal",
                             fontSize = 14.sp,
                             fontFamily = Poppins,
                             color = Color.Gray
@@ -126,7 +126,7 @@ fun HomeScreen(navController: NavHostController) {
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(16.dp) // Para manter espaçamento geral
+                    .padding(16.dp)
             ) {
                 // Categorias de animais
                 Row(
