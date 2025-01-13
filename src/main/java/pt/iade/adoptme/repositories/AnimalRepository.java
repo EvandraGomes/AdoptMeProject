@@ -1,4 +1,4 @@
-package pt.iade.adoptme.models.repositories;
+package pt.iade.adoptme.repositories;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

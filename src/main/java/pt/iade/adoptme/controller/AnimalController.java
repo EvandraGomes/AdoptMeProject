@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import pt.iade.adoptme.models.Animal;
-import pt.iade.adoptme.models.repositories.AnimalRepository;
+import pt.iade.adoptme.repositories.AnimalRepository;
 
 import java.net.URL;
 
@@ -57,4 +57,12 @@ public class AnimalController {
         }
     }
 
+    @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Animal getAnimalById(@PathVariable int id) {
+        logger.info("Buscando detalhes do animal com ID {}", id);
+        return animalRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Animal não encontrado com ID: " + id));
+    }
 }
+
+

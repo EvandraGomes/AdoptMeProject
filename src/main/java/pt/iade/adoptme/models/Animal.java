@@ -1,6 +1,8 @@
 package pt.iade.adoptme.models;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor; // isso aquib faz os getters e setters automaticamente
@@ -10,6 +12,7 @@ import lombok.NoArgsConstructor; // isso aquib faz os getters e setters automati
 @Data
 @NoArgsConstructor
 @Table(name = "animal")
+
 public class Animal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,5 +39,6 @@ public class Animal {
 
     @Column(name = "ani_image")
     private String image;
+
 
 }
