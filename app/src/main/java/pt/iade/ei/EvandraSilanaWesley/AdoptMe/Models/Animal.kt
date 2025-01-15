@@ -38,17 +38,17 @@ data class Animal(
 
         return when {
             ageInYears > 0 -> {
-                // Se for mais de 1 ano
+                //  mais de 1 ano
                 "$ageInYears ano${if (ageInYears > 1) "s" else ""}" +
                         (if (ageInMonths > 0 || ageInDays > 0) " e $ageInMonths mês${if (ageInMonths > 1) "es" else ""}" else "")
             }
             ageInMonths > 0 -> {
-                // Se for mais de 1 mês
+                //  mais de 1 mês
                 "$ageInMonths mês${if (ageInMonths > 1) "es" else ""}" +
                         (if (ageInDays > 0) " e $ageInDays dia${if (ageInDays > 1) "s" else ""}" else "")
             }
             else -> {
-                // Caso tenha menos de um mês
+                //  menos de um mês
                 "$ageInDays dia${if (ageInDays > 1) "s" else ""}"
             }
         }

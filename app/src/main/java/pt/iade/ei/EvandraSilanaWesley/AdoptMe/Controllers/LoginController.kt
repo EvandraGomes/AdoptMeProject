@@ -36,12 +36,12 @@ class LoginController(private val context: Context) {
                         val response = result.value.obj()
                         val token = response.optString("token", "")
                         if (token.isNotEmpty()) {
-                            // Salva o token no SharedPreferences
+                            // salvaar o token no SharedPreferences
                             val editor = sharedPreferences.edit()
                             editor.putString("user_token", token) // Armazenando o token gerado
                             editor.apply()
 
-                            // Chama a função de sucesso com o token
+
                             onResult(token)
                         } else {
                             onError("Token não recebido.")

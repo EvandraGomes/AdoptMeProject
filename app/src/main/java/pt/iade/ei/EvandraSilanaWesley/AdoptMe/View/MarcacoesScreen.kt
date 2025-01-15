@@ -104,7 +104,7 @@ fun MarcacoesScreen(animalId: Int, navController: NavController) {
         }
     }
 
-    // A navegação agora ocorre dentro de um LaunchedEffect, que é chamado de forma segura dentro de um Composable
+
     LaunchedEffect(showPopup) {
         if (showPopup) {
             kotlinx.coroutines.delay(2000) // Atraso de 2 segundos
@@ -146,7 +146,6 @@ fun MarcacoesScreen(animalId: Int, navController: NavController) {
 
             Spacer(modifier = Modifier.height(20.dp))
 
-            // Botão para confirmar agendamento
             Button(
                 onClick = { confirmarAgendamento() },
                 modifier = Modifier
@@ -196,8 +195,8 @@ fun DatePickerButton(onDateSelected: (String) -> Unit) {
     Button(
         onClick = { showDialog = true },
         modifier = Modifier
-            .fillMaxWidth(0.8f) // Reduzido para 70% da largura da tela
-            .height(45.dp) // Ajuste na altura
+            .fillMaxWidth(0.8f)
+            .height(45.dp)
             .padding(top = 4.dp, start = 80.dp),
         shape = RoundedCornerShape(16.dp),
         colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF03DAC6))
@@ -205,7 +204,7 @@ fun DatePickerButton(onDateSelected: (String) -> Unit) {
         Text(
             text = if (selectedDate.isEmpty()) "Escolher Data" else "Data: $selectedDate",
             color = Color.White,
-            fontSize = 14.sp, // Ajuste no tamanho da fonte
+            fontSize = 14.sp,
             fontFamily = Poppins
         )
     }
@@ -249,8 +248,8 @@ fun TimePicker(onTimeSelected: (String) -> Unit) {
     Button(
         onClick = { showDialog = true },
         modifier = Modifier
-            .fillMaxWidth(0.8f) // Reduzido para 70% da largura da tela
-            .height(45.dp) // Ajuste na altura
+            .fillMaxWidth(0.8f)
+            .height(45.dp)
             .padding(top = 4.dp , start = 80.dp),
         shape = RoundedCornerShape(16.dp),
         colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF018786))
@@ -258,7 +257,7 @@ fun TimePicker(onTimeSelected: (String) -> Unit) {
         Text(
             text = if (selectedTime == "00:00") "Escolher Hora" else "Hora: $selectedTime",
             color = Color.White,
-            fontSize = 14.sp, // Ajuste no tamanho da fonte
+            fontSize = 14.sp,
             fontFamily = Poppins
         )
     }

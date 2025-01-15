@@ -40,7 +40,7 @@ class MainActivity : ComponentActivity() {
 
                 NavHost(
                     navController = navController,
-                    startDestination = "WelcomeScreen" // Tela inicial
+                    startDestination = "WelcomeScreen" // tela inicial
                 ) {
                     composable("WelcomeScreen") {
                         WelcomeScreen(navController = navController)

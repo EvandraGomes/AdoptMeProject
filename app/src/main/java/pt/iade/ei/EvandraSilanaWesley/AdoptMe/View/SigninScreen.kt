@@ -41,14 +41,14 @@ import pt.iade.ei.EvandraSilanaWesley.AdoptMe.ui.theme.Poppins
 
 @Composable
 fun SigninScreenContent(navController: NavHostController) {
-    val context = LocalContext.current // Context seguro do Compose
-    val signinController = SigninController() // Agora controlador foi chamado
+    val context = LocalContext.current
+    val signinController = SigninController()
 
 
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
-        // Imagem de fundo
+
         Image(
             painter = painterResource(id = R.drawable.cadastro_page),
             contentDescription = "Imagem de fundo",
@@ -56,7 +56,7 @@ fun SigninScreenContent(navController: NavHostController) {
             contentScale = ContentScale.Crop
         )
 
-        // Conteúdo da tela de cadastro
+
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -89,7 +89,7 @@ fun SigninScreenContent(navController: NavHostController) {
                         label to textStates[index].value
                     }.toMap()
 
-                    // Verificar se todos os campos estão preenchidos
+                    // ver se todos os campos estão preenchidos
                     if (userData.values.any { it.isEmpty() }) {
                         Toast.makeText(context, "Por favor, preencha todos os campos.", Toast.LENGTH_SHORT).show()
                         return@Button

@@ -34,7 +34,7 @@ fun ProfileScreenContent(navController: NavController, context: Context) {
     val sharedPreferences = context.getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
     val userToken = sharedPreferences.getString("user_token", null)
 
-    // Verifica se o token existe
+    // ver se o token existe
     if (userToken.isNullOrEmpty()) {
         LaunchedEffect(Unit) {
             navController.navigate("LoginScreen") {
@@ -46,7 +46,7 @@ fun ProfileScreenContent(navController: NavController, context: Context) {
 
     val profileController = ProfileController(context)
 
-    // Variáveis para armazenar o estado dos dados do usuário
+    //  armazenar o estado dos dados do usuer
     var userData by remember { mutableStateOf<JSONObject?>(null) }
     var errorMessage by remember { mutableStateOf<String?>(null) }
 
@@ -64,7 +64,7 @@ fun ProfileScreenContent(navController: NavController, context: Context) {
         )
     }
 
-    // Exibe os dados ou a mensagem de erro
+
     if (errorMessage != null) {
         Text(text = "Erro: $errorMessage")
     } else if (userData != null) {
@@ -72,7 +72,7 @@ fun ProfileScreenContent(navController: NavController, context: Context) {
         Text(text = "Nome: ${userData?.getString("name")}")
         Text(text = "Email: ${userData?.getString("email")}")
     } else {
-        // Enquanto os dados não chegam, pode mostrar um loading
+
         CircularProgressIndicator()
     }
 
@@ -81,7 +81,7 @@ fun ProfileScreenContent(navController: NavController, context: Context) {
             .fillMaxSize()
             .padding(0.dp)
     ) {
-        // Aqui você usa a imagem de fundo com um Box, a imagem agora ocupa toda a tela
+
         Image(
             painter = painterResource(id = R.drawable.wppprofile), // Altere para o nome correto da sua imagem
             contentDescription = null,
@@ -94,7 +94,7 @@ fun ProfileScreenContent(navController: NavController, context: Context) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(horizontal = 24.dp, vertical = 80.dp), // Ajuste o padding superior para não cobrir o conteúdo
+                .padding(horizontal = 24.dp, vertical = 80.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Top
         ) {
@@ -115,7 +115,6 @@ fun ProfileScreenContent(navController: NavController, context: Context) {
 
             Spacer(modifier = Modifier.height(24.dp))
 
-            // Exibe informações do usuário
             userData?.let {
                 ProfileInfo(label = "Username", value = it.optString("name", "Desconhecido"))
                 ProfileInfo(label = "E-mail", value = it.optString("email", "Desconhecido"))

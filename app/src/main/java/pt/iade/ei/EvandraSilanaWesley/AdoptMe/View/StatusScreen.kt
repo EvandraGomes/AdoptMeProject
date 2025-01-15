@@ -31,13 +31,13 @@ import pt.iade.ei.EvandraSilanaWesley.AdoptMe.ui.theme.Poppins
 @Composable
             fun StatusScreenContent(navController: NavController, taskStates: List<Boolean>) {
                 val tasks = listOf(
-                    "Primeira visita do animal",
-                    "Avaliacao do adotante",
-                    "Processo de adocao",
-                    "Periodo de adaptacao",
-                    "Adocao confirmada",
-                    "Acompanhamento pos-Adocao",
-                    "Adotado!"
+                    "Primeira visita agendada!",
+                    "Avaliação do adotante",
+                    "Processo de adoção",
+                    "Período de adaptação",
+                    "Adoção confirmada",
+                    "Acompanhamento pós-Adocao",
+                    "Adotado! \uD83C\uDF89"
                 )
 
     Scaffold(
@@ -47,9 +47,9 @@ import pt.iade.ei.EvandraSilanaWesley.AdoptMe.ui.theme.Poppins
                     Text(
                         "Cada vez mais perto de um lar \n cheio de carinho!",
                         style = TextStyle(
-                            fontSize = 18.sp, // Tamanho da fonte
-                            fontFamily = Poppins, // Fonte
-                            color = Color.Black, // Cor do texto
+                            fontSize = 18.sp,
+                            fontFamily = Poppins,
+                            color = Color.Black,
 
 
                         ),
@@ -57,7 +57,7 @@ import pt.iade.ei.EvandraSilanaWesley.AdoptMe.ui.theme.Poppins
                     )
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = Color(0xFFF5E8D6) // Cor de fundo da AppBar
+                    containerColor = Color(0xFFF5E8D6)
                 )
             )
         }
@@ -69,7 +69,7 @@ import pt.iade.ei.EvandraSilanaWesley.AdoptMe.ui.theme.Poppins
                             .background(Color(0xFFF5E8D6))
                             .padding(innerPadding)
                     ) {
-                        // Espaçamento inicial antes da lista de tarefas
+
                         Spacer(modifier = Modifier.height(120.dp))
 
                         tasks.forEachIndexed { index, task ->
@@ -104,14 +104,14 @@ fun TaskItem(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center
     ) {
-        // Caixa para a bolinha, barra e texto
+
         Column(
             modifier = Modifier
-                .weight(1f)  // Deixa cada item ocupar a mesma largura
+                .weight(1f)
                 .padding(horizontal = 10.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // Bolinha verde ou cinza dependendo do estado
+            // estado da bolinha
             Box(
                 modifier = Modifier
                     .size(24.dp)
@@ -131,18 +131,18 @@ fun TaskItem(
                 }
             }
 
-            // Barra vertical fina abaixo da bolinha
+            // linha vertical fina abaixo da bolinha
             Box(
                 modifier = Modifier
-                    .width(2.dp)  // Barra muito fina
-                    .height(20.dp) // A altura é controlada
+                    .width(2.dp)  // espessura
+                    .height(20.dp) //  altura
                     .background(
                         color = if (isCompleted) Color.Blue else Color.LightGray
                     )
             )
         }
 
-        // Texto da tarefa ao lado da bolinha
+
         Text(
             text = task,
             style = TextStyle(
@@ -151,7 +151,7 @@ fun TaskItem(
                 color = if (isCompleted) Color.Black else Color.LightGray,
                 fontWeight = FontWeight.Normal
             ),
-            modifier = Modifier.weight(4f) // O texto ocupa o dobro do espaço
+            modifier = Modifier.weight(4f)
         )
     }
 }

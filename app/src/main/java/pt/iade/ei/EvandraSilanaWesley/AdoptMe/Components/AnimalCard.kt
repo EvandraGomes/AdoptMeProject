@@ -48,7 +48,7 @@ fun AnimalCard(animal: Animal, navController: NavController) {
     Row(
         modifier = Modifier
             .clickable {
-                // Navega para a tela de descrição, passando o ID do animal
+                // Navegar pra tela de descrição com o ID do animal
                 navController.navigate("AnimalDescriptionScreen/${animal.ani_id}")
             }
             .fillMaxWidth()
@@ -157,7 +157,7 @@ fun getAnimalList(): List<Animal> {
 @Preview(showBackground = true)
 @Composable
 fun AnimalCardPreview() {
-    // Criação de um NavController Fake para o Preview
+    // um NavController Fake para o Preview
     val fakeNavController = TestNavHostController(LocalContext.current)
 
     // Exemplo de animal para o preview

@@ -49,7 +49,7 @@ fun FavScreenContent(context: Context, navController: NavController) {
     var favorites by remember { mutableStateOf<List<Animal>>(emptyList()) }
     var errorMessage by remember { mutableStateOf("") }
 
-    // Carrega os favoritos ao iniciar a tela
+    // carregar os favs ao iniciar a tela
     LaunchedEffect(Unit) {
         fetchFavorites(
             context = context,
@@ -61,7 +61,7 @@ fun FavScreenContent(context: Context, navController: NavController) {
     Column(
         modifier = Modifier.fillMaxSize().background(Color(0xFFF5E8D6)) // Fundo da tela
     ) {
-        // TopBar com cor F5E8D6
+
         TopAppBar(
             title = {
                 Text(
@@ -72,13 +72,13 @@ fun FavScreenContent(context: Context, navController: NavController) {
                     fontWeight = FontWeight.Bold
                 )
             },
-            backgroundColor = Color(0xFFF5E8D6), // Cor da topbar
+            backgroundColor = Color(0xFFF5E8D6),
             modifier = Modifier
                 .height(0.dp)
         )
 
         if (errorMessage.isNotEmpty()) {
-            // Exibe a mensagem de erro
+
             Text(
                 text = errorMessage,
                 color = MaterialTheme.colors.error,
@@ -86,28 +86,28 @@ fun FavScreenContent(context: Context, navController: NavController) {
                 textAlign = TextAlign.Center
             )
         } else {
-            // Exibe a lista de favoritos
+            //  lista de favoritos
             LazyColumn(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(top = 80.dp) // Ajuste para deixar espaço para a TopBar
+                    .padding(top = 80.dp)
             ) {
                 items(favorites) { animal ->
-                    // Layout do card individual
+
                     Card(
                         shape = RoundedCornerShape(30.dp),
                         elevation = 4.dp,
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(8.dp)
-                            .height(300.dp) // Tamanho ajustado do card
+                            .height(300.dp)
                     ) {
                         Box(
                             modifier = Modifier
                                 .height(230.dp)
                                 .width(320.dp)
                         ) {
-                            // Imagem do animal que ocupa a metade inferior do Card
+
                             Image(
                                 painter = rememberAsyncImagePainter(model = animal.ani_image),
                                 contentDescription = animal.ani_name,
@@ -115,12 +115,12 @@ fun FavScreenContent(context: Context, navController: NavController) {
                                     .height(230.dp)
                                     .width(320.dp)
                                     .clip(RoundedCornerShape(30.dp))
-                                    .align(Alignment.BottomCenter) // Alinhamento no fundo
-                                    .padding(bottom = 0.dp), // A imagem vai até o fundo
+                                    .align(Alignment.BottomCenter)
+                                    .padding(bottom = 0.dp),
                                 contentScale = ContentScale.Crop
                             )
 
-                            // Nome do animal no topo com a data
+
                             Column(
                                 modifier = Modifier
                                     .fillMaxWidth()
@@ -135,9 +135,9 @@ fun FavScreenContent(context: Context, navController: NavController) {
 
                             }
 
-                            // Imagem do corazon sobrepondo a parte inferior da imagem do animal
+
                             Image(
-                                painter = painterResource(id = R.drawable.corazon2), // imagem do drawable
+                                painter = painterResource(id = R.drawable.corazon2),
                                 contentDescription = "Corazon",
                                 modifier = Modifier
                                     .size(90.dp)
@@ -154,7 +154,7 @@ fun FavScreenContent(context: Context, navController: NavController) {
     }
 }
 
-// Função de carregamento dos favoritos
+
 @RequiresApi(Build.VERSION_CODES.O)
 fun fetchFavorites(
     context: Context,
@@ -181,22 +181,20 @@ fun fetchFavorites(
                     for (i in 0 until jsonArray.length()) {
                         val jsonAnimal = jsonArray.getJSONObject(i)
                         val favDateString = jsonAnimal.optString("fav_date", "")
-
-                        // Processa a data para um formato legível
                         val formattedDate = formatFavoriteDate(favDateString)
 
                         animals.add(
                             Animal(
                                 ani_id = jsonAnimal.getInt("id"),
                                 ani_name = jsonAnimal.getString("name"),
-                                ani_breed = "", // Adapte conforme necessário
-                                ani_birthday = "", // Adapte conforme necessário
-                                ani_gender = "", // Adapte conforme necessário
-                                ani_type = "", // Adapte conforme necessário
+                                ani_breed = "", // n pede, n usa
+                                ani_birthday = "",
+                                ani_gender = "",
+                                ani_type = "",
                                 ani_image = jsonAnimal.optString("image", ""),
                                 isFavorite = true,
-                                favoriteDate = formattedDate, // Agora estamos passando a data formatada
-                                ani_description = "" // Adapte conforme necessário
+                                favoriteDate = formattedDate,
+                                ani_description = ""
                             )
                         )
                     }
@@ -215,16 +213,15 @@ fun fetchFavorites(
 @RequiresApi(Build.VERSION_CODES.O)
 fun formatFavoriteDate(favDateString: String): String {
     return try {
-        // Tenta converter a string de data para LocalDateTime
+        //  converter a string de data para LocalDateTime
         val formatter = DateTimeFormatter.ISO_DATE_TIME
         val dateTime = LocalDateTime.parse(favDateString, formatter)
 
-        // Calcula a diferença de tempo entre agora e a data de favoritação
+        // ver a diferença de tempo de agora e a data de favoritação
         val now = LocalDateTime.now()
         val daysAgo = ChronoUnit.DAYS.between(dateTime, now)
         val minutesAgo = ChronoUnit.MINUTES.between(dateTime, now)
 
-        // Exibe a diferença de tempo com base no tipo de dado
         when {
             daysAgo > 0 -> "$daysAgo dias atrás"
             minutesAgo > 0 -> "$minutesAgo minutos atrás"

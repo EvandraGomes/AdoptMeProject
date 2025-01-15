@@ -36,12 +36,12 @@ fun HomeScreen(navController: NavHostController) {
     val animals = remember { mutableStateOf<List<Animal>>(emptyList()) }
     val isLoading = remember { mutableStateOf(true) }
     val errorMessage = remember { mutableStateOf<String?>(null) }
-    val selectedCategory = remember { mutableStateOf("todos") } // Mostrar inicialmente
+    val selectedCategory = remember { mutableStateOf("todos") }
 
     LaunchedEffect(selectedCategory.value) {
         val controller = AnimalCategoryController()
 
-        isLoading.value = true // Mostra o indicador de carregamento enquanto busca
+        isLoading.value = true
         controller.fetchAnimalsByCategory(
             category = selectedCategory.value,
             onResult = { fetchedAnimals ->
@@ -94,7 +94,6 @@ fun HomeScreen(navController: NavHostController) {
                 },
                 navigationIcon = {
                     IconButton(onClick = {
-                        // Ao clicar no ícone de menu vai para outra tela
                         navController.navigate("MenuScreen")
                     }) {
                         Icon(
@@ -134,7 +133,7 @@ fun HomeScreen(navController: NavHostController) {
                     horizontalArrangement = Arrangement.SpaceEvenly
                 ) {
                     AnimalCategory(name = "Gato", imageRes = R.drawable.gatocategory) {
-                        selectedCategory.value = "gato" // Atualiza a categoria
+                        selectedCategory.value = "gato"
                     }
                     AnimalCategory(name = "Cão", imageRes = R.drawable.caocategory) {
                         selectedCategory.value = "cao"
@@ -147,9 +146,9 @@ fun HomeScreen(navController: NavHostController) {
                     }
                 }
 
-                Spacer(modifier = Modifier.height(16.dp)) // Espaço entre as categorias e os cards
+                Spacer(modifier = Modifier.height(16.dp))
 
-                // Conteúdo principal
+
                 if (isLoading.value) {
                     CircularProgressIndicator(
                         modifier = Modifier
@@ -165,7 +164,7 @@ fun HomeScreen(navController: NavHostController) {
                 } else {
                     LazyColumn(
                         modifier = Modifier.fillMaxSize(),
-                        verticalArrangement = Arrangement.spacedBy(12.dp) // Espaçamento entre os cards
+                        verticalArrangement = Arrangement.spacedBy(12.dp)
                     ) {
                         items(animals.value) { animal ->
                             AnimalCard(animal = animal, navController = navController)
@@ -182,7 +181,7 @@ fun ContentContainer(modifier: Modifier = Modifier, content: @Composable () -> U
     Box(
         modifier = modifier
             .fillMaxSize()
-            .padding(top = 1.dp) // Para não sobrepor a TopAppBar
+            .padding(top = 1.dp) // não sobrepor a TopAppBar
             .background(
                 color = Color(0xFFE7B070),
             )
@@ -195,6 +194,5 @@ fun ContentContainer(modifier: Modifier = Modifier, content: @Composable () -> U
 @Preview(showBackground = true)
 @Composable
 fun HomeScreenPreview() {
-    // Usando rememberNavController() para o preview
     HomeScreen(navController = rememberNavController())
 }

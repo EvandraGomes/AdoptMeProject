@@ -57,7 +57,7 @@ fun DoacoesMonetariasScreenContent(navController: NavHostController) {
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
-                // Título
+
                 Text(
                     text = "Contribua Financeiramente",
                     fontSize = 25.sp,
@@ -81,9 +81,9 @@ fun DoacoesMonetariasScreenContent(navController: NavHostController) {
                             onClick = { /* Lógica para selecionar valor */ },
                             colors = ButtonDefaults.buttonColors(containerColor = Color.White),
                             modifier = Modifier
-                                .height(90.dp) // Diminui a altura
+                                .height(90.dp) // diminuir a altura
                                 .padding(4.dp)
-                                .shadow(8.dp, RoundedCornerShape(12.dp)), // Adiciona sombra
+                                .shadow(8.dp, RoundedCornerShape(12.dp)), // add sombra
                             shape = RoundedCornerShape(12.dp)
                         ) {
                             Text(
@@ -96,7 +96,7 @@ fun DoacoesMonetariasScreenContent(navController: NavHostController) {
                     }
                 }
 
-                // Campo para digitar outro valor
+
                 val outroValor = remember { mutableStateOf("") }
                 TextField(
                     value = outroValor.value,
@@ -106,14 +106,13 @@ fun DoacoesMonetariasScreenContent(navController: NavHostController) {
                     modifier = Modifier
                         .fillMaxWidth(0.8f)
                         .padding(top = 30.dp)
-                        .shadow(4.dp, RoundedCornerShape(16.dp)), // Sombra e borda arredondada
+                        .shadow(4.dp, RoundedCornerShape(16.dp)),
                     shape = RoundedCornerShape(16.dp),
                     colors = TextFieldDefaults.textFieldColors(
                         containerColor = Color.White
                 )
                 )
 
-                // Métodos de pagamento
                 Text(
                     text = "Escolha o método de pagamento:",
                     fontSize = 20.sp,
@@ -161,7 +160,6 @@ fun DoacoesMonetariasScreenContent(navController: NavHostController) {
 
                 Spacer(modifier = Modifier.weight(1f))
 
-                // Botão de confirmação
                 Button(
                     onClick = {  },
                     modifier = Modifier

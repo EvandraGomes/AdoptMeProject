@@ -15,17 +15,18 @@ class AnimalCategoryController {
         onResult: (List<Animal>) -> Unit,
         onError: (String) -> Unit
     ) {
+        // 10.0.2.2 pra usar no emulador, IP do pc pra passar pro tlf
         val url = "http://10.0.2.2:8080/api/animals/type/$category"
 
         url.httpGet().responseJson { _, _, result ->
             when (result) {
                 is Result.Success -> {
                     try {
-                        // Obter resposta bruta para depuração
+                        // resposta bruta para "depuração"
                         val rawResponse = result.value.content
                         Log.d("API Response", "Resposta bruta: $rawResponse")
 
-                        // Verificar se é um JSONArray ou JSONObject
+                        // ver se é um JSONArray ou JSONObject
                         val animals: List<Animal> = try {
                             val jsonArray = result.value.array()
                             Log.d("API Response", "Resposta é um JSONArray")
@@ -47,7 +48,7 @@ class AnimalCategoryController {
                 }
 
                 is Result.Failure -> {
-                    // Log detalhado em caso de falha da API
+                    // caso de falha da API usar Logs
                     val errorMsg = result.error.message ?: "Erro desconhecido"
                     Log.e("API Error", "Erro na API: $errorMsg", result.error.exception)
                     onError("Erro na API: $errorMsg")
@@ -56,7 +57,7 @@ class AnimalCategoryController {
         }
     }
 
-    // Função para converter JSONArray em lista de objetos Animal
+    //  converter um JSONArray pra uma lista de objetos
     fun parseAnimals(jsonArray: JSONArray): List<Animal> {
         val animals = mutableListOf<Animal>()
 

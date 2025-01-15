@@ -67,14 +67,14 @@ fun LoginScreenContent(navController: NavHostController, context: Context) {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFFF5E8D6))  // Cor de fundo para toda a tela
+            .background(Color(0xFFF5E8D6))
     ) {
-        // Icone de seta por cima do fundo
+
         IconButton(
             onClick = { navController.navigateUp() },
             modifier = Modifier
                 .padding(16.dp)
-                .size(30.dp)// Posição do ícone
+                .size(30.dp)
                 .align(Alignment.TopStart)
         ) {
             Icon(
@@ -84,7 +84,6 @@ fun LoginScreenContent(navController: NavHostController, context: Context) {
         }
 
 
-        // Background image (imagem de fundo)
         Image(
             painter = painterResource(id = R.drawable.login_page),
             contentDescription = "Imagem de fundo",
@@ -92,7 +91,7 @@ fun LoginScreenContent(navController: NavHostController, context: Context) {
             contentScale = ContentScale.Crop
         )
 
-        // Conteúdo da tela (formulário de login)
+
         Column(
             modifier = Modifier
                 .fillMaxSize()

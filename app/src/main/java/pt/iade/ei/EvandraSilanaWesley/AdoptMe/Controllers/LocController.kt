@@ -11,7 +11,7 @@ class LocController {
 
     private val moshi = Moshi.Builder().build()
 
-    // Reutilizar o modelo DonationPoint pras locs
+    // reutilizar o modelo DonationPoint pras locs
     fun fetchLocsByType(locType: String, onResult: (List<DonationPointsController.DonationPoint>) -> Unit, onError: (String) -> Unit) {
         val url = "http://10.0.2.2:8080/api/loc/type/$locType"
         val listType = Types.newParameterizedType(List::class.java, DonationPointsController.DonationPoint::class.java)

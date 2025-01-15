@@ -39,7 +39,7 @@ fun DoacoesScreenContent(navController: NavHostController) {
 
     val donationPointsController = DonationPointsController()
 
-    // Fazer a requisição para o backend
+
     LaunchedEffect(Unit) {
         donationPointsController.fetchDonationPoints(
             onResult = { points ->
@@ -54,7 +54,7 @@ fun DoacoesScreenContent(navController: NavHostController) {
     }
 
     Scaffold(
-        topBar = { /* Removido o TopAppBar */ }
+        topBar = {  }
     ) { innerPadding ->
         Column(
             modifier = Modifier
@@ -72,27 +72,27 @@ fun DoacoesScreenContent(navController: NavHostController) {
                 AndroidView(
                     modifier = Modifier
                         .fillMaxSize()
-                        .weight(1f), // Garante que o mapa ocupe o espaço restante
+                        .weight(1f), // garantir que o mapa ocupe o espaço restante
                     factory = { ctx ->
-                        // Configuração do mapa
+                        // configuração do mapa
                         Configuration.getInstance().load(ctx, ctx.getSharedPreferences("osm_pref", 0))
                         val mapView = MapView(ctx)
 
-                        // Configurar o TileSource do OpenStreetMap diretamente
+                        // configurar o TileSource do OpenStreetMap diretamente
                         mapView.setTileSource(org.osmdroid.tileprovider.tilesource.TileSourceFactory.MAPNIK)
 
-                        // Forçar a atualização do mapa
+                        // fazer o mapa abrir no sim ou no sim
                         mapView.invalidate()
 
-                        mapView.controller.setZoom(12.0) // Zoom inicial ajustado
-                        mapView.controller.setCenter(GeoPoint(0.0, 0.0)) // Centro inicial neutro
+                        mapView.controller.setZoom(12.0) // zoom inicial
+                        mapView.controller.setCenter(GeoPoint(0.0, 0.0)) // centro inicial neutro
                         mapView
                     },
                     update = { mapView ->
-                        // Limpar marcadores anteriores
+
                         mapView.overlays.clear()
 
-                        // Adicionar marcadores para os pontos de doação
+                        // add marcadores para os pontos de doação
                         donationPoints.forEach { point ->
                             val marker = Marker(mapView)
                             val geoPoint = GeoPoint(point.locLatitude, point.locLongitude)
@@ -113,18 +113,17 @@ fun DoacoesScreenContent(navController: NavHostController) {
                             mapView.overlays.add(marker)
                         }
 
-                        // Centralizar no primeiro marcador, se existir
+                        // centralizar no primeiro marcador, se existir
                         if (donationPoints.isNotEmpty()) {
                             val firstPoint = donationPoints[0]
                             mapView.controller.setCenter(GeoPoint(firstPoint.locLatitude, firstPoint.locLongitude))
-                            mapView.controller.setZoom(15.0) // Zoom ajustado para marcadores
+                            mapView.controller.setZoom(15.0) // zoom ajustado para marcadores
                         }
                     }
                 )
             }
 
 
-            // Botão "Operações Monetárias" com largura menor
             Button(
                 onClick = { navController.navigate("DoacoesMonetariasScreen") },
                 modifier = Modifier

@@ -73,7 +73,7 @@ fun AnimalDescriptionScreenContent(
             TopAppBar(
                 title = {
                     Text(
-                        text = "Detalhes do Animal",
+                        text = "",
                         fontFamily = Poppins,
                         fontWeight = FontWeight.Bold,
                         color = Color.White
@@ -84,7 +84,7 @@ fun AnimalDescriptionScreenContent(
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                             contentDescription = "Voltar",
-                            tint = Color.White
+                            tint = Color(0xFFF5E8D6)
                         )
                     }
                 },
@@ -96,10 +96,10 @@ fun AnimalDescriptionScreenContent(
             LazyColumn(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(top = 56.dp) // Espaço para a Top Bar
+                    .padding(top = 56.dp) // espaço para a Top Bar
             ) {
                 item {
-                    // Imagem do animal
+
                     Image(
                         painter = rememberAsyncImagePainter(animalData.ani_image),
                         contentDescription = "Foto do Animal",
@@ -114,7 +114,7 @@ fun AnimalDescriptionScreenContent(
                 item {
                     Spacer(modifier = Modifier.height(16.dp))
 
-                    // Nome e botão de favorito
+
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -132,7 +132,7 @@ fun AnimalDescriptionScreenContent(
 
                         Image(
                             painter = rememberAsyncImagePainter(
-                                model = if (isFavorite.value) R.drawable.favoritado else R.drawable.favoritar
+                                model = if (isFavorite.value) R.drawable.favoritar else R.drawable.favoritado
                             ),
                             contentDescription = "Favoritar",
                             modifier = Modifier
@@ -158,7 +158,7 @@ fun AnimalDescriptionScreenContent(
                 item {
                     Spacer(modifier = Modifier.height(16.dp))
 
-                    // Detalhes do animal (Idade, Raça, etc.)
+
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -175,7 +175,7 @@ fun AnimalDescriptionScreenContent(
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
                             Text(
-                                text = "Idade",
+                                text = "Aniversário \uD83C\uDF82",
                                 fontFamily = Poppins,
                                 fontWeight = FontWeight.Bold,
                                 fontSize = 14.sp,
@@ -220,7 +220,7 @@ fun AnimalDescriptionScreenContent(
                 item {
                     Spacer(modifier = Modifier.height(16.dp))
 
-                    // Descrição do animal
+                    // descrição do animal
                     Text(
                         text = animalData.ani_description,
                         fontFamily = Poppins,
@@ -232,13 +232,13 @@ fun AnimalDescriptionScreenContent(
                 }
 
                 item {
-                    Spacer(modifier = Modifier.height(16.dp))
+                    Spacer(modifier = Modifier.height(2F.dp))
 
-                    // Botão "Adotar"
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(horizontal = 40.dp, vertical = 150.dp)
+                            .align(Alignment.BottomCenter)
                     ) {
                         Button(
                             onClick = {
@@ -277,28 +277,26 @@ fun handleFavorite(animalId: Int, context: Context, onResult: (String) -> Unit, 
 
     val url = "http://10.0.2.2:8080/api/favorites/add"
 
-    // Criando o corpo da requisição JSON (estrutura com animalId dentro de um objeto)
+    //  corpo da requisição JSON (estrutura com animalId dentro de um objeto)
     val json = JSONObject().apply {
         put("animalId", JSONObject().apply {
             put("id", animalId)
         })
     }
 
-    // Log para depurar a requisição
     Log.d("Favorito", "Requisição para: $url com corpo: $json")
 
-    // Fazendo a requisição POST com os dados
     url.httpPost()
         .body(json.toString())
         .header("Content-Type" to "application/json")
-        .header("Authorization" to "Bearer $token")  // Enviar o token no cabeçalho
+        .header("Authorization" to "Bearer $token")
         .responseJson { _, _, result ->
             when (result) {
                 is Result.Success -> {
                     val response = result.value.obj()
                     val responseMessage = response.optString("message", "")
                     if (responseMessage.isNotEmpty()) {
-                        onResult(responseMessage)  // Caso o backend retorne uma mensagem de sucesso
+                        onResult(responseMessage)
                     } else {
                         onError("Erro ao favoritar o animal.")
                     }

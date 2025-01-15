@@ -117,13 +117,26 @@ fun BlogPostScreen(navController: NavHostController) {
                         color = Color(0xFF4A4A4A),
                         fontWeight = FontWeight.Bold
                     ),
-                    modifier = Modifier.padding(top = 32.dp)
+                    modifier = Modifier.padding(bottom = 12.dp)
                 )
             }
+
+            item {
+                Text(
+                    text = "",
+                    style = TextStyle(
+                        fontFamily = Poppins,
+                        fontSize = 20.sp,
+                        color = Color(0xFF4A4A4A),
+                        fontWeight = FontWeight.Bold
+                    ),
+                    modifier = Modifier.padding(bottom = 30.dp)
+                )
+            }
+
         }
     }
 }
-
 @Preview(showBackground = true)
 @Composable
 fun BlogPostScreenPreview() {
